@@ -4,6 +4,7 @@ import com.delivery.dao.DataBaseConnector;
 import com.delivery.dao.impl.entity.UserDaoImpl;
 import com.delivery.entity.User;
 import com.delivery.exeption.LoginException;
+import com.delivery.service.PasswordEncryption;
 import com.delivery.service.UserService;
 import com.delivery.service.validator.UserValidator;
 
@@ -16,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String password) {
         if (userValidator.validate(email, "email")) {
-            Optional<User> user = userDao.loginUser(email, password);  ///encrypt
+            Optional<User> user = userDao.loginUser(email, PasswordEncryption.encrypt(password));  ///encrypt
             if (user.isPresent()) {
                 return user.get();
             }

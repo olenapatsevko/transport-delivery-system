@@ -6,6 +6,7 @@ import com.delivery.dao.entity.UserDao;
 import com.delivery.dao.impl.entity.core.AbstractCrudDaoImpl;
 import com.delivery.entity.User;
 import com.delivery.exeption.SqlRuntimeException;
+import com.delivery.service.PasswordEncryption;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +41,7 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
         preparedStatement.setInt(1, entity.getId());
         preparedStatement.setString(2, entity.getFirstName());
         preparedStatement.setString(3, entity.getSecondName());
-        preparedStatement.setString(4, entity.getPassword());
+        preparedStatement.setString(4, PasswordEncryption.encrypt(entity.getPassword()));
         preparedStatement.setString(5, entity.getPhone());
         preparedStatement.setString(6, entity.getEmail());
         preparedStatement.setBoolean(7, entity.getRole().getVal());
