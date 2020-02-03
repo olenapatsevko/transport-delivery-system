@@ -2,6 +2,7 @@ package com.delivery.servlets;
 
 import com.delivery.entity.User;
 import com.delivery.exeption.LoginException;
+import com.delivery.exeption.SqlRuntimeException;
 import com.delivery.service.impl.UserServiceImpl;
 import com.delivery.service.validator.UserValidator;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/login")
+
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
@@ -32,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session=request.getSession();
             session.setAttribute("name",email);
 
-        }catch (LoginException e){
+        }catch (LoginException | SqlRuntimeException e){
             request.getRequestDispatcher("login.jsp").include(request, response);
         }
 

@@ -136,3 +136,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+!/.idea/
+!/.idea/dataSources.xml
+!/transport-delivery-system.iml
