@@ -22,7 +22,7 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
     private static final String UPDATE_ALL = "UPDATE user SET  name = ? , surname = ? , password = ? , phone = ? , email = ?   WHERE id = ?";
 
     private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email=?";
-    private static final String SAVE_ENTITY = "INSERT INTO user (id, name, surname,  password, phone, email , role) values (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SAVE_ENTITY = "INSERT INTO user (id, name, surname,  password, phone, email , role) values (NULL, ?, ?, ?, ?, ?, ?)";
     private static final String LOGIN_USER = "SELECT * FROM user WHERE email = ? and password = ?";
 
 
@@ -38,13 +38,12 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
 
     @Override
     protected void paramSet(User entity, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setString(2, entity.getFirstName());
-        preparedStatement.setString(3, entity.getSecondName());
-        preparedStatement.setString(4, PasswordEncryption.encrypt(entity.getPassword()));
-        preparedStatement.setString(5, entity.getPhone());
-        preparedStatement.setString(6, entity.getEmail());
-        preparedStatement.setBoolean(7, entity.getRole().getVal());
+        preparedStatement.setString(1, entity.getFirstName());
+        preparedStatement.setString(2, entity.getSecondName());
+        preparedStatement.setString(3, PasswordEncryption.encrypt(entity.getPassword()));
+        preparedStatement.setString(4, entity.getPhone());
+        preparedStatement.setString(5, entity.getEmail());
+        preparedStatement.setBoolean(6, entity.getRole().getVal());
     }
 
     @Override

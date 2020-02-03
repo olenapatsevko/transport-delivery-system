@@ -4,7 +4,7 @@ import com.delivery.entity.enums.Role;
 
 public class User {
 
-    private final int id;
+    private final int id =1;
     private final String firstName;
     private final String secondName;
     private final String email;
@@ -13,7 +13,7 @@ public class User {
     private final Role role = Role.USER;
 
     public User(Builder builder) {
-        this.id = builder.id;
+       // this.id = builder.id;
         this.firstName = builder.firstName;
         this.secondName = builder.secondName;
         this.email = builder.email;

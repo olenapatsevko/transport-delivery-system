@@ -25,7 +25,6 @@ public class RegisterServlet extends HttpServlet {
                 .withFirstName(request.getParameter("name"))
                 .withSecondName(request.getParameter("surname"))
                 .withPhone(request.getParameter("phone"))
-               .withId(1111)
                 .build();
         UserValidator userValidator = new UserValidator();
         try{

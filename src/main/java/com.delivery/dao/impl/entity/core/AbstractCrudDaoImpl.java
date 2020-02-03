@@ -21,15 +21,15 @@ public abstract class AbstractCrudDaoImpl<E> extends AbstractDao<E> implements C
         UPDATE_ALL = update_all;
     }
 
-    protected void save(E entity) {
+    public void save(E entity) {
         try (final PreparedStatement preparedStatement =
                      connector.getConnection().prepareStatement(SAVE_ENTITY)) {
             paramSet(entity, preparedStatement);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.warn("Exception while trying to save new user", e);
-            throw new SqlRuntimeException("Exception to save new user:", e);
+            LOGGER.warn("Exception while trying to save new "+entity.getClass().getSimpleName(), e);
+            throw new SqlRuntimeException(e.getMessage());
         }
 
     }
