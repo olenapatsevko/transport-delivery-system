@@ -10,7 +10,7 @@ public class User {
     private final String email;
     private final String password;
     private final String phone;
-    private final Role role;
+    private final Role role = Role.USER;
 
     public User(Builder builder) {
         this.id = builder.id;
@@ -18,7 +18,7 @@ public class User {
         this.secondName = builder.secondName;
         this.email = builder.email;
         this.phone = builder.phone;
-        this.role = builder.role;
+     //   this.role = builder.role;
         this.password = builder.password;
 
     }

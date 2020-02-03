@@ -5,7 +5,7 @@ import com.delivery.exeption.ValidationException;
 
 public interface UserService {
 
-    User login(String email, String password) throws ValidationException;
+    User login(String email, String password) ;
 
     void register(User user) throws ValidationException;
 }

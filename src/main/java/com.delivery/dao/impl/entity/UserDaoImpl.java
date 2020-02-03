@@ -61,6 +61,9 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
                 .withId(resultSet.getInt("id"))
                 .withEmail(resultSet.getString("email"))
                 .withPassword(resultSet.getString("password"))
+                .withPhone(resultSet.getString("phone"))
+                .withFirstName(resultSet.getString("name"))
+                .withSecondName(resultSet.getString("surname"))
                 .build();
     }
 
@@ -75,8 +78,8 @@ public class UserDaoImpl extends AbstractCrudDaoImpl<User> implements UserDao {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.debug("Exception while tying to find a user", e);
-            throw new SqlRuntimeException("Exception in loginUser method ", e);
+            LOGGER.debug("Exception while tying to login a user", e);
+            throw new SqlRuntimeException( e.getMessage());
         }
         return Optional.empty();
     }
