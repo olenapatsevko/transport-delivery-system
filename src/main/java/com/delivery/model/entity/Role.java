@@ -1,7 +1,7 @@
 package com.delivery.model.entity;
 
 public enum Role {
-    USER(true, "user"), ADMIN(false, "admin");
+    USER(true, "user"), ADMIN(false, "admin"), GUEST(true ,"guest");
 
     private boolean isUser;
     private String role;

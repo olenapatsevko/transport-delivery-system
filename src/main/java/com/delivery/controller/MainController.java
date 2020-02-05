@@ -2,7 +2,6 @@ package com.delivery.controller;
 
 import com.delivery.controller.command.Action;
 import com.delivery.controller.command.profile.*;
-import org.apache.logging.log4j.core.appender.rolling.action.DeleteAction;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,29 +12,46 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.delivery.controller.command.TextConstants.CommandPaths.APPLICATION_PATH_REGEX;
+import static com.delivery.controller.command.TextConstants.CommandPaths.DEFAULT_PATH;
+import static com.delivery.controller.command.TextConstants.Routes.EMPTY_STRING;
+import static com.delivery.controller.command.TextConstants.Routes.REDIRECT;
+
 public class MainController extends HttpServlet {
 
-    private Map<String, Action> actionMap = new HashMap<>();
+    private Map<String, Action> actions = new HashMap<>();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
 
-        actionMap.put("login", new Login());
-        actionMap.put("register", new Register());
-        actionMap.put("logout", new Logout());
-        actionMap.put("deleteProfile", new DeleteProfile());
-        actionMap.put("personalCabinet", new PersonalCabinet());
+        actions.put("login", new Login());
+        actions.put("register", new Register());
+        actions.put("logout", new Logout());
+        actions.put("deleteProfile", new DeleteProfile());
+        actions.put("personalCabinet", new PersonalCabinet());
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { processRequest(request, response); }
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {processRequest(request, response); }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        processRequest(request, response);
+    }
 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        processRequest(request, response);
+    }
 
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response)
             throws ServletException, IOException {
-    String actionKey = request.getParameter("action");
-    Action action = actionMap.get(actionKey);
-    String view = action.execute(request, response);
+        String path = request.getRequestURI();
+        path = path.replaceAll(APPLICATION_PATH_REGEX, EMPTY_STRING);
+
+        Action command = actions.getOrDefault(path, (req, resp) -> DEFAULT_PATH);
+        String page = command.execute(request, response);
+
+        if (page.contains(REDIRECT)) {
+            response.sendRedirect(page.replace(REDIRECT, EMPTY_STRING));
+        } else {
+            request.getRequestDispatcher(page).forward(request, response);
+        }
     }
 }

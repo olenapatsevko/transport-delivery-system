@@ -30,13 +30,13 @@
 
                 <div class="container-login100-form-btn p-t-25">
                     <button class="login100-form-btn">
-                        <a href="registration.jsp">  Register</a>
+                        <a href="WEB-INF/common/registration.jsp">  Register</a>
                     </button>
                 </div>
 
                 <div class="container-login100-form-btn p-t-25">
                     <button class="login100-form-btn">
-                        <a href="login.jsp">
+                        <a href="WEB-INF/common/login.jsp">
                             Login </a>
                     </button>
                 </div>

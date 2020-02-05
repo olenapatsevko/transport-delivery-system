@@ -7,35 +7,47 @@
 
 
   <servlet>
-    <servlet-name>Register</servlet-name>
-    <servlet-class>com.delivery.servlets.RegisterServlet</servlet-class>
+    <servlet-name>Main</servlet-name>
+    <servlet-class>com.delivery.controller.MainController</servlet-class>
   </servlet>
-  
-  <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>com.delivery.servlets.LoginServlet</servlet-class>
-  </servlet>
-
   <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/login</url-pattern>
+    <servlet-name>Main</servlet-name>
+    <url-pattern>/app/*</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>Register</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
-  
+
+
+
+  <!--    Lang filter (localization)-->
+  <filter>
+    <filter-name>SessionLocaleFilter</filter-name>
+    <filter-class>com.delivery.controller.filter.SessionLocaleFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionLocaleFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!--    Access filter-->
+  <filter>
+    <filter-name>AccessFilter</filter-name>
+    <filter-class>com.delivery.controller.filter.AccessFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AccessFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
 
 
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
-    <location>/error.jsp</location>
+    <location>/WEB-INF/common/error/error.jsp</location>
   </error-page>
 
   <error-page>
     <error-code>404</error-code>
-    <location>/404.jsp</location>
+    <location>/WEB-INF/common/error/404.jsp</location>
   </error-page>
 </web-app>
 

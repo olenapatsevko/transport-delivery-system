@@ -23,7 +23,7 @@
 
 <div class="wrapper">
     <div class="inner">
-        <img src="images/image-1.png" alt="" class="image-1">
+        <img src="../../images/image-1.png" alt="" class="image-1">
         <form action="/register" method="post">
             <h3>New Account?</h3>
 
@@ -61,7 +61,7 @@
                 <span>Register</span>
             </button>
         </form>
-        <img src="images/image-2.png" alt="" class="image-2">
+        <img src="../../images/image-2.png" alt="" class="image-2">
     </div>
 
 </div>
