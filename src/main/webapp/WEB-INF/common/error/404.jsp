@@ -12,7 +12,7 @@
 </head>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Free 404 White for Iphone, Android & Smartphone Mobile Website Template | Home :: w3layouts</title>
+    <title>404</title>
     <style type="text/css">
         body{
             font-family:Arial, Helvetica, sans-serif;

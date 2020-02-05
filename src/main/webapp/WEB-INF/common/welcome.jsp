@@ -31,9 +31,7 @@
     <div class="container offset-1">
         <div class="description text-left">
             <h3>
-                <span>
-                    <fmt:message key="tax.report"/>
-                </span>
+
                 <p>
                     <fmt:message key="landing.welcome"/>
                 </p>
