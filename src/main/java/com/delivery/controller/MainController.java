@@ -1,6 +1,8 @@
 package com.delivery.controller;
 
 import com.delivery.controller.command.Action;
+import com.delivery.controller.command.directions.Home;
+import com.delivery.controller.command.directions.LogMe;
 import com.delivery.controller.command.profile.*;
 
 import javax.servlet.ServletConfig;
@@ -12,8 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.delivery.controller.command.TextConstants.CommandPaths.APPLICATION_PATH_REGEX;
-import static com.delivery.controller.command.TextConstants.CommandPaths.DEFAULT_PATH;
+import static com.delivery.controller.command.TextConstants.CommandPaths.*;
 import static com.delivery.controller.command.TextConstants.Routes.EMPTY_STRING;
 import static com.delivery.controller.command.TextConstants.Routes.REDIRECT;
 
@@ -23,7 +24,10 @@ public class MainController extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-
+        actions.put(LOG_ME,
+                new LogMe());
+        actions.put(HOME,
+                new Home());
         actions.put("login", new Login());
         actions.put("register", new Register());
         actions.put("logout", new Logout());

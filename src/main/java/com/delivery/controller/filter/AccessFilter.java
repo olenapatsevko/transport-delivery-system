@@ -1,10 +1,6 @@
 package com.delivery.controller.filter;
 
-
-
 import com.delivery.model.entity.Role;
-import com.delivery.model.entity.User;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +9,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.delivery.controller.command.TextConstants.CommandPaths.*;
-import static com.delivery.controller.command.TextConstants.Routes.EMPTY_STRING;
 import static com.delivery.controller.command.TextConstants.Parameters.ROLE;
-import static com.delivery.controller.command.TextConstants.Routes.TO_LOGIN;
-import static com.delivery.controller.command.TextConstants.Routes.ACCESS_FORBIDDEN_403;
+import static com.delivery.controller.command.TextConstants.Routes.*;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
 
@@ -33,14 +27,12 @@ public class AccessFilter implements Filter {
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
-
         allowedRoutes.put(Role.USER,
                 Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, SHOW_REPORTS, PERSONAL_CABINET,
                         MAKE_REPORT, EDIT_REPORTS, MAKE_COMPLAINT,
                         SUBMIT_REPORT, SUBMIT_COMPLAINT, SUBMIT_EDIT_REPORT)
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
-
 
         allowedRoutes.put(Role.ADMIN,
                 Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, PERSONAL_CABINET)

@@ -1,15 +1,56 @@
 package com.delivery.controller.command.profile;
 
 import com.delivery.controller.command.Action;
+import com.delivery.controller.command.CommandUtil;
+import com.delivery.model.entity.Role;
+import com.delivery.model.entity.User;
+import com.delivery.model.service.UserService;
+import com.delivery.model.service.validator.UserValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.delivery.controller.command.TextConstants.Parameters.*;
+import static com.delivery.controller.command.TextConstants.Routes.*;
+
 public class Login implements Action {
+
+    private static final Logger logger = LogManager.getLogger(Login.class);
+    private UserService userService;
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return null;
+        final String email = request.getParameter(EMAIL);
+        final String password = request.getParameter(PASSWORD);
+        final UserValidator userValidator = new UserValidator();
+
+        if (!(userValidator.validate(email, EMAIL) && userValidator.validate(password, PASSWORD))) {
+            logger.info("User [" + email + "]" + " entered wrong data.");
+            return LOGIN_FAIL_INVALID_INPUT;
+        }
+
+        User user = userService.login(email, password);
+        if (user != null) {
+            //in order to prevent logging into one account at the same time
+//            if (CommandUtility.checkUserIsLogged(request, email)) {
+//                return MULTILOGIN_ERROR;
+//            }
+
+            final Role role = user.getRole();
+            CommandUtil.logUser(request, email, password, role);
+            logger.info("User [" + email + "] role [" + role.toString() + "] signed in successfully.");
+        } else {
+            logger.info("Invalid attempt of login user: [" + email + "]");
+            request.getSession().setAttribute(ROLE, Role.GUEST);
+            return USER_NOT_EXIST;
+        }
+
+        String path = request.getServletContext().getContextPath();
+        return REDIRECT + path + TO_PERSONAL_CABINET;
     }
 }
+

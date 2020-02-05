@@ -8,8 +8,8 @@ import java.io.IOException;
 import static com.delivery.controller.command.TextConstants.Parameters.LANG_PARAMETER;
 import static com.delivery.controller.command.TextConstants.Parameters.SESSION_LOCALE_PARAMETER;
 
-
 public class SessionLocaleFilter implements Filter {
+
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
