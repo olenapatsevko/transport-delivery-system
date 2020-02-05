@@ -7,15 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.delivery.controller.command.TextConstants.Routes.TO_HOME;
+import static com.delivery.controller.command.TextConstants.Routes.TO_REGISTRATION;
 
-public class Home implements Action {
+
+
+public class RegMe implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return TO_HOME;
+        return TO_REGISTRATION;
     }
 }
-
-
-

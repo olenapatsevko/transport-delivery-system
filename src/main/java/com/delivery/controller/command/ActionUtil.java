@@ -4,7 +4,6 @@ import com.delivery.model.entity.Role;
 import com.delivery.model.service.UserService;
 import com.delivery.model.service.impl.UserServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,8 +12,6 @@ import java.util.HashSet;
 
 import static com.delivery.controller.command.TextConstants.Parameters.*;
 import static com.delivery.controller.command.TextConstants.Routes.INVALID_SESSION_ERROR;
-
-
 
 public class ActionUtil {
 
@@ -87,7 +84,7 @@ public class ActionUtil {
      */
     //to prevent user coming back to cached pages after logout
     public static void disallowBackToCached(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
 
         final HttpSession session = request.getSession();
         final String path = request.getServletContext().getContextPath();

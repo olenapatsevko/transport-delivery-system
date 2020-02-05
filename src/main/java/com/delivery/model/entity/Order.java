@@ -55,9 +55,7 @@ public class Order {
 
         private int id;
         private User sender;
-        private Place dispatch;
         private Place destination;
-        private User receiver;
         private OrderStatus orderStatus;
         private String address;
 

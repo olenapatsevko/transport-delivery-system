@@ -21,9 +21,13 @@ public class SessionLocaleFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+    @Override
     public void destroy() {
+    // nothing because we dont use this method
     }
 
-    public void init(FilterConfig arg0) throws ServletException {
+    @Override
+    public void init(FilterConfig arg0) {
+        // nothing because we dont use this method
     }
 }

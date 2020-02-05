@@ -1,4 +1,4 @@
-package com.delivery.model.db;
+package com.delivery.model.domain;
 
 import java.util.List;
 

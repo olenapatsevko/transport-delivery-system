@@ -21,7 +21,7 @@ public class AccessFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        allowedRoutes = new HashMap<>();
+        allowedRoutes = new EnumMap<>(Role.class);
         allowedRoutes.put(Role.GUEST,
                 Stream.of(EMPTY_STRING, REG_ME, LOG_ME, LOGIN, REGISTRATION, HOME)
                         .collect(collectingAndThen(
@@ -73,5 +73,6 @@ public class AccessFilter implements Filter {
 
     @Override
     public void destroy() {
+        //decause it should be implemented
     }
 }

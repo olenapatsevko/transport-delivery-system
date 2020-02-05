@@ -5,7 +5,6 @@ import com.delivery.model.entity.User;
 import com.delivery.model.service.UserService;
 import com.delivery.model.service.impl.UserServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -98,21 +97,21 @@ public class CommandUtil {
          * It solves the issue when user could logged out and than return
          * to its personal cabinet by clicking "back" button in browser.
          *
-         * @param request HttpServletRequest.
+         * @param request  HttpServletRequest.
          * @param response HttpServletResponse.
          */
         //to prevent user coming back to cached pages after logout
         public static void disallowBackToCached(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
+                throws IOException {
 
             final HttpSession session = request.getSession();
             final String path = request.getServletContext().getContextPath();
 
             //to prevent user coming back to cached pages after logout
-            response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-            response.setHeader("Pragma","no-cache");
-            response.setDateHeader ("Expires", 0);
+            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires", 0);
             if (session.getAttribute(EMAIL) == null || session.getAttribute(PASSWORD) == null
                     || session.getAttribute(ROLE) == null) {
                 response.sendRedirect(path +  INVALID_SESSION_ERROR);

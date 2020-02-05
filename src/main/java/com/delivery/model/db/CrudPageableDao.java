@@ -1,8 +1,7 @@
 package com.delivery.model.db;
 
-import com.delivery.model.db.CrudDao;
-import com.delivery.model.db.Page;
-import com.delivery.model.db.Pageable;
+import com.delivery.model.domain.Page;
+import com.delivery.model.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;

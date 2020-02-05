@@ -19,7 +19,6 @@ public final class PasswordEncryption {
 
 
     public static final String encrypt(String password) {
-        System.out.println(salt.length);
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory factory = null;
         try {

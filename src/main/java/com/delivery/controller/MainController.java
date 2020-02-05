@@ -20,25 +20,25 @@ import static com.delivery.controller.command.TextConstants.Routes.REDIRECT;
 
 public class MainController extends HttpServlet {
 
-    private Map<String, Action> actions = new HashMap<>();
+    private static final Map<String, Action> actions = new HashMap<>();
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        actions.put(LOG_ME,
-                new LogMe());
-        actions.put(HOME,
-                new Home());
-        actions.put("login", new Login());
-        actions.put("register", new Register());
-        actions.put("logout", new Logout());
+    public void init(ServletConfig config)  {
+        actions.put(LOG_ME, new LogMe());
+        actions.put(HOME, new Home());
+        actions.put(LOGIN, new Login());
+        actions.put(REGISTRATION, new Register());
+        actions.put(LOGOUT, new Logout());
         actions.put("deleteProfile", new DeleteProfile());
-        actions.put("personalCabinet", new PersonalCabinet());
+        actions.put(PERSONAL_CABINET, new PersonalCabinet());
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         processRequest(request, response);
     }
