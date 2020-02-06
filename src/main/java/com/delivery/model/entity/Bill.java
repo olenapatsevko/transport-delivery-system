@@ -5,6 +5,8 @@ import com.delivery.model.entity.bill.Material;
 import com.delivery.model.entity.bill.Size;
 import com.delivery.model.entity.bill.Weight;
 
+import java.util.Objects;
+
 public class Bill {
 
     private final int id;
@@ -27,6 +29,25 @@ public class Bill {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+        return id == bill.id &&
+                payment == bill.payment &&
+                Objects.equals(shipment, bill.shipment) &&
+                deliveryType == bill.deliveryType &&
+                size == bill.size &&
+                weight == bill.weight &&
+                material == bill.material;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, shipment, payment, deliveryType, size, weight, material);
     }
 
     public int getId() {

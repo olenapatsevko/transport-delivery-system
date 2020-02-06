@@ -22,6 +22,11 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/ajax-submit-report.js"></script>
 
 </head>
+<header>
+    <div class="bg-light">
+        <jsp:include page="header.jsp"/>
+    </div>
+</header
 <body>
 
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/common/navbar-landing.jsp"/>

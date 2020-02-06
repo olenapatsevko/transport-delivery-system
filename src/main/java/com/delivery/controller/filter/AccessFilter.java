@@ -54,7 +54,7 @@ public class AccessFilter implements Filter {
                 .replace("/", EMPTY_STRING);
 
         if (request.getSession().getAttribute(ROLE) == null) {
-            request.getSession().setAttribute(ROLE, Role.GUEST);
+            request.getSession().setAttribute(ROLE, Role.GUEST.toString());
         }
         Role currentRole = (Role.valueOf((String) request.getSession().getAttribute(ROLE)));
 
@@ -63,7 +63,7 @@ public class AccessFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             //user is guest? then sign in
-            if (currentRole.equals(Role.GUEST)) {
+            if (currentRole.equals(Role.GUEST.toString())) {
                 request.getRequestDispatcher(TO_LOGIN).forward(request, response);
             } else {
                 request.getRequestDispatcher(ACCESS_FORBIDDEN_403).forward(request, response);

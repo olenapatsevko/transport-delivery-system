@@ -46,7 +46,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
         preparedStatement.setString(4, PasswordEncryption.encrypt(entity.getPassword()));
         preparedStatement.setString(5, entity.getPhone());
         preparedStatement.setString(6, entity.getEmail());
-        preparedStatement.setBoolean(7, entity.getRole().getVal());
+        preparedStatement.setBoolean(7, entity.getRole().equals(Role.USER));
     }
 
     @Override

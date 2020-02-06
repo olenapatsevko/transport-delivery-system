@@ -1,5 +1,7 @@
 package com.delivery.model.entity;
 
+import java.util.Objects;
+
 public class Place {
 
     private final int id;
@@ -13,6 +15,22 @@ public class Place {
         this.region = builder.region;
         this.city = builder.city;
         this.id = builder.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Place place = (Place) o;
+        return id == place.id &&
+                Objects.equals(country, place.country) &&
+                Objects.equals(region, place.region) &&
+                Objects.equals(city, place.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, country, region, city);
     }
 
     public static Builder builder() {

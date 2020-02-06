@@ -18,7 +18,7 @@ public final class PasswordEncryption {
     private static final byte[] salt = ResourceBundle.getBundle("service").getString("salt").getBytes();
 
 
-    public static final String encrypt(String password) {
+    public static String encrypt(String password) {
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory factory = null;
         try {

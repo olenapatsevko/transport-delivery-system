@@ -7,9 +7,9 @@
 <nav class="navbar navbar-default" role="navigation" style="border-radius: 5px">
         <!-- Brand and toggle get grouped for better mobile display -->
 
-        <div class="navbar-center navbar-brand " href="#"
+        <div class="navbar-center navbar-brand  shadow p-3 mb-5 bg-white rounded "
              style="width: 100%; display: flex; align-content: center; justify-content: space-between;">
-            <a class="navbar-brand" style="display: flex; align-items: center;"><fmt:message key="calculator.page"></a>
+            <a class="navbar-brand" style="display: flex; align-items: center;" href=""><fmt:message key="calculator.page"/></a>
 
             <a class="navbar-brand"  style="font-size: 3rem" ><fmt:message key="delivery.system"/></a>
 

@@ -55,7 +55,7 @@ public class ActionUtil {
     public static void logUser(HttpServletRequest request, String email, String password, Role role) {
         request.getSession().setAttribute(PASSWORD, password);
         request.getSession().setAttribute(EMAIL, email);
-        request.getSession().setAttribute(ROLE, role);
+        request.getSession().setAttribute(ROLE, role.toString());
     }
 
     public static void logoutUser(HttpServletRequest request, String email) {

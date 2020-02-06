@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>Main</servlet-name>
-    <servlet-class>com.delivery.controller.MainController</servlet-class>
+    <servlet-class>com.delivery.controller.FrontController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Main</servlet-name>

@@ -1,5 +1,7 @@
 package com.delivery.model.entity;
 
+import java.util.Objects;
+
 public class Shipment {
 
     private final int id;
@@ -20,6 +22,24 @@ public class Shipment {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shipment shipment = (Shipment) o;
+        return id == shipment.id &&
+                Float.compare(shipment.weight, weight) == 0 &&
+                Float.compare(shipment.height, height) == 0 &&
+                Float.compare(shipment.width, width) == 0 &&
+                Float.compare(shipment.length, length) == 0 &&
+                Objects.equals(order, shipment.order);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, weight, height, width, length, order);
     }
 
     public int getId() {

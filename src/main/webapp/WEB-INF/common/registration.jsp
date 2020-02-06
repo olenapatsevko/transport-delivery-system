@@ -1,11 +1,13 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="view"/>
 
-<html lang="${sessionScope.lang}">
 
+<html lang="${sessionScope.lang}">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,8 +18,13 @@
     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-primary">
-<div id="layoutAuthentication">
+<header>
+    <div class="bg-light">
+        <jsp:include page="header.jsp"/>
+    </div>
+</header>
+<body>
+<div id="layoutAuthentication" class="shadow-sm p-3 mb-5 bg-white rounded">
     <div id="layoutAuthentication_content">
         <main>
             <div class="container">
@@ -48,7 +55,7 @@
                                 </form>
                             </div>
                             <div class="card-footer text-center">
-                                <div class="small"><a href="register.html"><fmt:message  key="login.link"></a></div>
+                                <div class="small"><a href="${pageContext.request.contextPath}/app/log-me"><fmt:message  key="login.link"/></a></div>
                             </div>
                         </div>
                     </div>

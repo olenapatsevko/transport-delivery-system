@@ -20,9 +20,9 @@
     <jsp:include page="header.jsp"/>
     </div>
 </header>
-<body class="bg-primary">
+<body >
 
-<div id="layoutAuthentication">
+<div id="layoutAuthentication " class="shadow-sm p-3 mb-5 bg-white rounded">
     <div id="layoutAuthentication_content">
         <main>
             <div class="container">

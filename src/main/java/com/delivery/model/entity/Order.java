@@ -1,5 +1,7 @@
 package com.delivery.model.entity;
 
+import java.util.Objects;
+
 public class Order {
 
     private final int id;
@@ -18,6 +20,23 @@ public class Order {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id &&
+                Objects.equals(sender, order.sender) &&
+                Objects.equals(destination, order.destination) &&
+                orderStatus == order.orderStatus &&
+                Objects.equals(address, order.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sender, destination, orderStatus, address);
     }
 
     public int getId() {

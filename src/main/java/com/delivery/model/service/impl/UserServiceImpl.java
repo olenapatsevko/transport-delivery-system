@@ -1,6 +1,5 @@
 package com.delivery.model.service.impl;
 
-
 import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.impl.UserDaoImpl;
 import com.delivery.model.entity.User;
@@ -12,8 +11,8 @@ import com.delivery.model.service.validator.UserValidator;
 import java.util.Optional;
 
 public final class UserServiceImpl implements UserService {
-    private static final UserDaoImpl userDao = new UserDaoImpl(new DataBaseConnector());
-    private static final UserValidator userValidator = new UserValidator();
+    private   UserDaoImpl userDao = new UserDaoImpl(new DataBaseConnector());
+    private   UserValidator userValidator = new UserValidator();
 
     @Override
     public User login(String email, String password) {
@@ -34,7 +33,7 @@ public final class UserServiceImpl implements UserService {
                     .withRole(user.getRole())
                     .withPhone(user.getPhone())
                     .withSecondName(user.getSecondName())
-                    .withPassword(PasswordEncryption.encrypt(user.getPassword()))
+                    .withPassword((user.getPassword()))
                     .withId(user.getId())
                     .withFirstName(user.getFirstName())
                     .withEmail(user.getEmail())
