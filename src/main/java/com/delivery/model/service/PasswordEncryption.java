@@ -32,7 +32,7 @@ public final class PasswordEncryption {
         } catch (InvalidKeySpecException e) {
             LOGGER.warn("Exception while trying to hash password", e);
         }
-        return Arrays.toString(hash);
+        return new String(hash);
 
     }
 }

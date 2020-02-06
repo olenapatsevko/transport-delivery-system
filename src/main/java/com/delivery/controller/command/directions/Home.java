@@ -1,6 +1,6 @@
 package com.delivery.controller.command.directions;
 
-import com.delivery.controller.command.Action;
+import com.delivery.controller.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static com.delivery.controller.command.TextConstants.Routes.TO_HOME;
 
-public class Home implements Action {
+public class Home implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

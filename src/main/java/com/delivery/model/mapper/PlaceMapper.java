@@ -5,8 +5,15 @@ import com.delivery.model.entity.Place;
 
 public class PlaceMapper implements Mapper<Place, PlaceDomain> {
 
+
+
     @Override
-    public Place map(PlaceDomain placeDomain) {
-        return null;
+    public PlaceDomain mapToDomain(Place placeDomain) {
+        return new PlaceDomain(placeDomain.getCountry(), placeDomain.getRegion(), placeDomain.getCity());
+    }
+
+    @Override
+    public Place mapToEntity(PlaceDomain place) {
+        throw new UnsupportedOperationException("This table is restricted to expand");
     }
 }

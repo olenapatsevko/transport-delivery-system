@@ -17,13 +17,6 @@ import static com.delivery.controller.command.TextConstants.Routes.INVALID_SESSI
 public class CommandUtil {
 
 
-        private static UserService userService;
-
-
-        static {
-            userService = new UserServiceImpl();
-
-        }
 
 
         /**
@@ -77,29 +70,7 @@ public class CommandUtil {
         }
 
 
-        /**
-         * Obtain student from current session.
-         *
-         * @param request HttpServletRequest.
-         */
-        public static User getCurrentSessionUser(HttpServletRequest request){
 
-            final HttpSession session = request.getSession();
-            String email = session.getAttribute(EMAIL).toString();
-            String password = session.getAttribute(PASSWORD).toString();
-
-            return userService.login(email, password);
-        }
-
-
-        /**
-         * This method is invoked in commands which need to disallow using cache.
-         * It solves the issue when user could logged out and than return
-         * to its personal cabinet by clicking "back" button in browser.
-         *
-         * @param request  HttpServletRequest.
-         * @param response HttpServletResponse.
-         */
         //to prevent user coming back to cached pages after logout
         public static void disallowBackToCached(HttpServletRequest request, HttpServletResponse response)
                 throws IOException {

@@ -2,6 +2,7 @@ package com.delivery.controller.filter;
 
 import com.delivery.model.entity.Role;
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,8 +14,6 @@ import static com.delivery.controller.command.TextConstants.Parameters.ROLE;
 import static com.delivery.controller.command.TextConstants.Routes.*;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
-
-
 
 public class AccessFilter implements Filter {
     private Map<Role, Set<String>> allowedRoutes;
@@ -28,9 +27,8 @@ public class AccessFilter implements Filter {
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
         allowedRoutes.put(Role.USER,
-                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, SHOW_REPORTS, PERSONAL_CABINET,
-                        MAKE_REPORT, EDIT_REPORTS, MAKE_COMPLAINT,
-                        SUBMIT_REPORT, SUBMIT_COMPLAINT, SUBMIT_EDIT_REPORT)
+                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION,  PERSONAL_CABINET
+                        )
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 

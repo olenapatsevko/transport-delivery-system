@@ -1,6 +1,7 @@
 package com.delivery.model.service.impl;
 
 import com.delivery.model.db.impl.UserDaoImpl;
+import com.delivery.model.domain.UserDomain;
 import com.delivery.model.entity.Role;
 import com.delivery.model.entity.User;
 import com.delivery.model.service.validator.UserValidator;
@@ -25,16 +26,12 @@ public class UserServiceImplTest {
     @Mock
     private UserValidator userValidator;
     @InjectMocks
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
-    @Before
-    public void init(){
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void testLogin(){
-        when(userDao.loginUser(anyString(), anyString())).thenReturn(Optional.of(User.builder().build()));
+        when(userDao.findByEmail(anyString())).thenReturn(Optional.of(User.builder().build()));
         when(userValidator.validate(any(), any())).thenReturn(true);
         Assert.assertEquals(User.builder().build().getId(), userService.login("", "").getId());
 
@@ -44,7 +41,7 @@ public class UserServiceImplTest {
     public void testRegister(){
         doNothing().when(userDao).save(any(User.class));
        doNothing().when(userValidator).validate(any(User.class));
-       userService.register(User.builder().build());
+       userService.register(UserDomain.builder().build());
        verify(userValidator).validate(eq(User.builder().build()));
        verify(userDao).save(eq(User.builder().build()));
 

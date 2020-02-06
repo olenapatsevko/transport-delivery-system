@@ -13,25 +13,8 @@ import java.util.HashSet;
 import static com.delivery.controller.command.TextConstants.Parameters.*;
 import static com.delivery.controller.command.TextConstants.Routes.INVALID_SESSION_ERROR;
 
-public class ActionUtil {
+public final class ActionUtil {
 
-    private static UserService userService;
-
-
-    static {
-        userService = new UserServiceImpl();
-
-    }
-
-
-    /**
-     * This is the executing certain command method
-     * which provides the concrete logic for each
-     * class that implements it.
-     *
-     * @param request HttpServletRequest.
-     * @param email   String.
-     */
     public static boolean checkUserIsLogged(HttpServletRequest request, String email) {
 
         @SuppressWarnings("unchecked")

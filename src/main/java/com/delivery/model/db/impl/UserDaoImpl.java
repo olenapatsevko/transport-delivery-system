@@ -24,7 +24,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
     private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email=?";
     private static final String SAVE_ENTITY = "INSERT INTO user (id, name, surname,  password, phone, email , role) values (?, ?, ?, ?, ?, ?, ?)";
-    private static final String LOGIN_USER = "SELECT * FROM user WHERE email = ? and password = ?";
+
 
 
     public UserDaoImpl(DataBaseConnector connector) {
@@ -43,7 +43,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
         preparedStatement.setInt(1,entity.getId());
         preparedStatement.setString(2, entity.getFirstName());
         preparedStatement.setString(3, entity.getSecondName());
-        preparedStatement.setString(4, PasswordEncryption.encrypt(entity.getPassword()));
+        preparedStatement.setString(4, entity.getPassword());
         preparedStatement.setString(5, entity.getPhone());
         preparedStatement.setString(6, entity.getEmail());
         preparedStatement.setBoolean(7, entity.getRole().equals(Role.USER));
@@ -71,22 +71,6 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
                 .build();
     }
 
-    public Optional<User> loginUser(String login , String password){
-        try (final PreparedStatement preparedStatement =
-                     connector.getConnection().prepareStatement(LOGIN_USER)) {
-            preparedStatement.setString(1,login);
-            preparedStatement.setString(2,password);
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return Optional.of(mapResultSetToEntity(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            LOGGER.debug("Exception while tying to login a user", e);
-            throw new SqlRuntimeException( e.getMessage());
-        }
-        return Optional.empty();
-    }
 
 
 

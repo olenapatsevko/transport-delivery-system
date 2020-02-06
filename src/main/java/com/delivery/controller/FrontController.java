@@ -1,8 +1,7 @@
 package com.delivery.controller;
 
-import com.delivery.controller.command.Action;
-import com.delivery.controller.command.actions.CalculateDelivery;
-import com.delivery.controller.command.directions.CalculatorPage;
+import com.delivery.controller.command.Command;
+import com.delivery.controller.command.directions.CalculateMe;
 import com.delivery.controller.command.directions.Home;
 import com.delivery.controller.command.directions.LogMe;
 import com.delivery.controller.command.directions.RegMe;
@@ -23,7 +22,7 @@ import static com.delivery.controller.command.TextConstants.Routes.*;
 
 public class FrontController extends HttpServlet {
 
-    private static final Map<String, Action> actions = new HashMap<>();
+    private static final Map<String, Command> actions = new HashMap<>();
 
     @Override
     public void init(ServletConfig config)  {
@@ -35,8 +34,7 @@ public class FrontController extends HttpServlet {
                 new Logout());
         actions.put(PERSONAL_CABINET,
                 new PersonalCabinet());
-        actions.put(CALCULATOR, new CalculateDelivery());
-
+        actions.put(CALCULATOR, new CalculateMe());
 
         //directions
         actions.put(HOME,
@@ -45,8 +43,9 @@ public class FrontController extends HttpServlet {
                 new RegMe());
         actions.put(LOG_ME,
                 new LogMe());
-        actions.put(CALCULATOR_REDIRECT,new CalculatorPage());
+        actions.put(TO_CALCULATOR_REDIRECT,new CalculateMe());
     }
+
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -64,7 +63,7 @@ public class FrontController extends HttpServlet {
         String path = request.getRequestURI();
         path = path.replaceAll(APPLICATION_PATH_REGEX, EMPTY_STRING);
 
-        Action command = actions.getOrDefault(path, (req, resp) -> DEFAULT_PATH);
+        Command command = actions.getOrDefault(path, (req, resp) -> DEFAULT_PATH);
         String page = command.execute(request, response);
 
         if (page.contains(REDIRECT)) {

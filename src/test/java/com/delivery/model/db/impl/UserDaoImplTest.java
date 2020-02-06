@@ -42,17 +42,6 @@ public class UserDaoImplTest {
         assertEquals(3 , userDao.findAll(3,3).size());
     }
 
-
-    @Test
-    public void loginUserFail(){
-        assertFalse(userDao.loginUser("dh", "fg").isPresent());
-    }
-
-    @Test
-    public void loginUserSuccess(){
-        assertTrue(userDao.loginUser("wdudderidge8@skype.com", "pT1L3WLtx").isPresent());
-    }
-
     @Test
     public void saveNewUser(){
         userDao.save(User.builder().withEmail("asd").withFirstName("asd")

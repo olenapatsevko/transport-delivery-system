@@ -1,9 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="view"/>
-
+<!DOCTYPE html>
 <html lang="${sessionScope.lang}">
 <head>
     <meta charset="utf-8" />
@@ -31,10 +34,36 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4"><fmt:message key="login"/></h3></div>
                             <div class="card-body">
-                                <form>
-                                    <div class="form-group"><label class="small mb-1" for="inputEmailAddress"><fmt:message key="email"/></label><input class="form-control py-4" id="inputEmailAddress" type="email" placeholder=<fmt:message key="input.email"/> /></div>
-                                    <div class="form-group"><label class="small mb-1" for="inputPassword"><fmt:message key="password"/></label><input class="form-control py-4" id="inputPassword" type="password" placeholder=<fmt:message key="input.password"/> /></div>
-                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"><a class="btn btn-primary" href="index.html"><fmt:message key="login"/></a></div>
+                                <form role="form" method="post" action="${pageContext.request.contextPath}/app/login" >
+
+                                    <c:if test="${param.dataInvalid == true}">
+                                        <p style="color: darkblue"><fmt:message key="invalid.input"/></p>
+                                    </c:if>
+
+
+<%--                                    <c:if test="${ param.userExist != null and param.userExist == false}">--%>
+<%--                                        <p style="color: darkred"><fmt:message key="user.not.found"/></p>--%>
+<%--                                    </c:if>--%>
+
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="email">
+                                            <fmt:message key="email"/>
+                                        </label>
+                                        <input class="form-control py-4" id="email" name="email" type="email" placeholder=<fmt:message key="input.email"/> />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="small mb-1" for="password">
+                                            <fmt:message key="password"/>
+                                        </label>
+                                        <input class="form-control py-4" name="password" id="password" type="password" placeholder=<fmt:message key="input.password"/> />
+                                    </div>
+
+                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <button type="submit" class="btn btn-primary">
+                                            <fmt:message key="login"/>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center">

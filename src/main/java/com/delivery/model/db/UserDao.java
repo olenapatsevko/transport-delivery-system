@@ -10,5 +10,5 @@ public interface UserDao extends CrudPageableDao<User> {
 
     Optional<User> findByEmail(String email);
 
-    Optional<User> loginUser(String login, String password);
+
 }

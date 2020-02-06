@@ -1,6 +1,6 @@
 package com.delivery.controller.command.directions;
 
-import com.delivery.controller.command.Action;
+import com.delivery.controller.command.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import static com.delivery.controller.command.TextConstants.Routes.TO_REGISTRATI
 
 
 
-public class RegMe implements Action {
+public class RegMe implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

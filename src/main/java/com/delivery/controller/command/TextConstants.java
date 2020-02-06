@@ -7,7 +7,7 @@ public class TextConstants {
 
         //calculator
         public static final String CALCULATOR = "calculator";
-        
+
         public static final String SESSION_LOCALE_PARAMETER = "sessionLocale";
         public static final String LANG_PARAMETER = "lang";
         public static final String EMAIL = "email";
@@ -39,7 +39,7 @@ public class TextConstants {
 
 
     public static class Routes {
-        public static final String CALCULATOR_REDIRECT = "/WEB-INF/common/calculator.jsp";
+        public static final String TO_CALCULATOR_REDIRECT = "/WEB-INF/common/calculator.jsp";
 
 
         public static final String REDIRECT = "redirect@";

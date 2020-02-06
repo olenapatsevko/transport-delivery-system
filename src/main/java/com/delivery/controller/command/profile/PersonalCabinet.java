@@ -1,6 +1,6 @@
 package com.delivery.controller.command.profile;
 
-import com.delivery.controller.command.Action;
+import com.delivery.controller.command.Command;
 import com.delivery.controller.command.CommandUtil;
 import com.delivery.model.entity.Role;
 
@@ -14,11 +14,11 @@ import static com.delivery.controller.command.TextConstants.Parameters.ROLE;
 import static com.delivery.controller.command.TextConstants.Routes.BASE;
 import static com.delivery.controller.command.TextConstants.Routes.USER_NOT_EXIST;
 
-public class PersonalCabinet implements Action {
+public class PersonalCabinet implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         final HttpSession session = request.getSession();
-        final Role role = (Role) session.getAttribute(ROLE);
+        final Role role = Role.valueOf((String) session.getAttribute(ROLE));
 
         if (session.getAttribute(ROLE) != Role.GUEST) {
             //to prevent user coming back to cached pages after logout by clicking "back arrow" in browser
