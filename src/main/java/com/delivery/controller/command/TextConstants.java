@@ -7,9 +7,7 @@ public class TextConstants {
 
         //calculator
         public static final String CALCULATOR = "calculator";
-
-
-
+        
         public static final String SESSION_LOCALE_PARAMETER = "sessionLocale";
         public static final String LANG_PARAMETER = "lang";
         public static final String EMAIL = "email";

@@ -28,6 +28,7 @@ public class Login implements Action {
         final String password = request.getParameter(PASSWORD);
         final UserValidator userValidator = new UserValidator();
 
+
         if (!(userValidator.validate(email, EMAIL) && userValidator.validate(password, PASSWORD))) {
             logger.info("User [" + email + "]" + " entered wrong data.");
             return LOGIN_FAIL_INVALID_INPUT;
