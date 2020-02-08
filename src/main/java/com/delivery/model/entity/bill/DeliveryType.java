@@ -1,18 +1,21 @@
 package com.delivery.model.entity.bill;
 
 public enum DeliveryType {
-    CITY(10),TOWN(10), REGION(30), COUNTRY(90);
+    CITY(10f),
+    TOWN(10f),
+    REGION(30f),
+    COUNTRY(90f);
 
-    int i ;
+    float i ;
 
-    public int getI() {
+    public float getI() {
         return i;
     }
 
 
 
 
-    DeliveryType(int i) {
+    DeliveryType(float i) {
     this.i = i;
     }
 }

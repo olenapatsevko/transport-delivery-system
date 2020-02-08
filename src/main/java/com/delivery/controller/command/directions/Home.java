@@ -12,7 +12,7 @@ import static com.delivery.controller.command.TextConstants.Routes.TO_HOME;
 public class Home implements Command {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return TO_HOME;
     }
 }

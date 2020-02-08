@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class ShipmentSizeDaoImpl extends AbstractEnumCrudDaoImpl<Size> {
+public class SizeDaoImpl extends AbstractEnumCrudDaoImpl<Size> {
     private static final String FIND_BY_ID = "SELECT * FROM size WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM size WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM size ";
     private static final String FIND_ALL = "SELECT * FROM size";
     private static final String FIND_BY_NAME = "SELECT * from size where name = ?";
 
-    public ShipmentSizeDaoImpl(DataBaseConnector connector) {
+    public SizeDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL);
     }
 

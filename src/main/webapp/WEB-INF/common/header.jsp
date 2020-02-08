@@ -12,7 +12,9 @@
 
         <div class="navbar-center navbar-brand  shadow p-3 mb-5 bg-white rounded "
              style="width: 100%; display: flex; align-content: center; justify-content: space-between;">
-            <a class="navbar-brand" style="display: flex; align-items: center;" href=""><fmt:message key="calculator.page"/></a>
+            <a class="navbar-brand" style="display: flex; align-items: center;"  href="${pageContext.request.contextPath}/app/calc-me">
+                <fmt:message key="calculator.page"/>
+            </a>
 
             <a class="navbar-brand"  style="font-size: 3rem" ><fmt:message key="delivery.system"/></a>
 

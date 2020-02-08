@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.delivery.controller.command.TextConstants.CommandPaths.*;
+import static com.delivery.controller.command.TextConstants.Parameters.CALCULATE;
 import static com.delivery.controller.command.TextConstants.Parameters.ROLE;
 import static com.delivery.controller.command.TextConstants.Routes.*;
 import static java.util.stream.Collectors.collectingAndThen;
@@ -22,7 +23,7 @@ public class AccessFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         allowedRoutes = new EnumMap<>(Role.class);
         allowedRoutes.put(Role.GUEST,
-                Stream.of(EMPTY_STRING, REG_ME, LOG_ME, LOGIN, REGISTRATION, HOME)
+                Stream.of(EMPTY_STRING, REG_ME, LOG_ME, LOGIN, REGISTRATION, HOME, CALCULATE, CALC_ME)
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 

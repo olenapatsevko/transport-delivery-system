@@ -16,18 +16,6 @@ import static com.delivery.controller.command.TextConstants.Routes.INVALID_SESSI
 
 public class CommandUtil {
 
-
-
-
-        /**
-         * This is the executing certain command method
-         * which provides the concrete logic for each
-         * class that implements it.
-         *
-         * @param request HttpServletRequest.
-         * @param email String.
-         *
-         */
         public static boolean checkUserIsLogged(HttpServletRequest request, String email){
 
             @SuppressWarnings("unchecked")
@@ -46,7 +34,6 @@ public class CommandUtil {
                     .setAttribute(LOGGED_USERS, loggedUsers);
             return false;
         }
-
 
         public static void logUser(HttpServletRequest request, String email, String password, Role role){
             request.getSession().setAttribute(PASSWORD, password);
@@ -68,8 +55,6 @@ public class CommandUtil {
             session.removeAttribute(PASSWORD);
             session.removeAttribute(ROLE);
         }
-
-
 
         //to prevent user coming back to cached pages after logout
         public static void disallowBackToCached(HttpServletRequest request, HttpServletResponse response)

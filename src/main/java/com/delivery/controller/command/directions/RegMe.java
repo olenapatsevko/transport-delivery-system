@@ -14,7 +14,7 @@ import static com.delivery.controller.command.TextConstants.Routes.TO_REGISTRATI
 public class RegMe implements Command {
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         return TO_REGISTRATION;
     }
 }

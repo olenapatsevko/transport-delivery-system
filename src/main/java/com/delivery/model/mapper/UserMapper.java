@@ -18,7 +18,6 @@ public class UserMapper implements Mapper<User, UserDomain> {
                 .withRole(user.getRole())
                 .withFirstName(user.getFirstName())
                 .withSecondName(user.getSecondName())
-                .withId(user.getId())
                 .withPhone(user.getPhone())
                 .build();
     }
@@ -31,8 +30,8 @@ public class UserMapper implements Mapper<User, UserDomain> {
                 .withPassword(passwordEncryption.encrypt(user.getPassword()))
                 .withFirstName(user.getFirstName())
                 .withSecondName(user.getSecondName())
-                .withId(user.getId())
                 .withPhone(user.getPhone())
+                .withId(0)
                 .build();
     }
 }

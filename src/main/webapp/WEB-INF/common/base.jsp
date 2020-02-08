@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
@@ -17,29 +20,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark " >
     <a class="navbar-brand" href="index.html">Start Bootstrap</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
-><!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-    </form>
+><!-- Language change -->
+    <a class="navbar-brand ua-icon" href="${pageContext.request.contextPath}?sessionLocale=en">
+        <option data-content='<span class="flag-icon flag-icon-us"></span> English'><fmt:message key="lang.en"/></option>
+    </a>
+    <a class="navbar-brand ua-icon" href="${pageContext.request.contextPath}?sessionLocale=ua">
+        <option  data-content='<span class="flag-icon flag-icon-ua"></span> Ukrainian'><fmt:message key="lang.ua"/></option>
+    </a>
     <!-- Navbar-->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="login.html">Logout</a>
             </div>
         </li>
     </ul>
 </nav>
+
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -101,58 +102,89 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Dashboard</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
-                            <div class="card-body">Primary Card</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-warning text-white mb-4">
-                            <div class="card-body">Warning Card</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Success Card</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">Danger Card</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="mt-4"><fmt:message key="personal.cabinet"/></h1>
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                            <div class="card-header"><em class="fas fa-chart-area mr-1"></em>Delivery order</div>
+                            <div class="card-body">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                        <div class="card-header"><h3 class="text-center font-weight-light my-4"><fmt:message
+                                                key="calculator.page"/></h3></div>
+                                        <div class="card-body">
+                                            <form role="form" method="post" action="${pageContext.request.contextPath}/app/calculator" >
+
+                                                <div class="form-group">
+                                                    <label for="departure"><fmt:message key="departure"/></label>
+                                                    <select class="form-control" id="departure">
+                                                        <c:forEach items="${towns}" var="town"  >
+                                                            <option> ${town} </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="destination"><fmt:message key="destination"/></label>
+                                                    <select class="form-control" id="destination">
+                                                        <c:forEach items="${towns}" var="town">
+                                                            <option> <c:out value = "${town}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="material"><fmt:message key="shipment.type"/></label>
+                                                    <select class="form-control" id="material">
+                                                        <option>1</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-3 mb-4">
+                                                        <label for="validationCustom03"><fmt:message key="weight"/></label>
+                                                        <input type="number" class="form-control" id="validationCustom03" min="0" placeholder="<fmt:message key="weight"/>" required>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid city.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-4">
+                                                        <label for="validationCustom04"><fmt:message key="width"/></label>
+                                                        <input type="number" class="form-control" id="validationCustom04" min="0" placeholder="<fmt:message key="width"/>" required>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid state.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-4">
+                                                        <label for="validationCustom05"><fmt:message key="length"/></label>
+                                                        <input type="number" class="form-control" id="validationCustom05" min="0" placeholder="<fmt:message key="length"/>" required>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid zip.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3 mb-4">
+                                                        <label for="validationCustom06"><fmt:message key="height"/></label>
+                                                        <input type="number" class="form-control" id="validationCustom06" min="0" placeholder="<fmt:message key="height"/>" required>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid zip.
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <fmt:message key="calculate"/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                            <div class="card-header"><em class="fas fa-chart-bar mr-1"></em>Bar Chart Example</div>
                             <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                         </div>
                     </div>
@@ -646,18 +678,6 @@
                 </div>
             </div>
         </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>

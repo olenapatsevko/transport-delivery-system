@@ -40,10 +40,10 @@
                                         <p style="color: darkblue"><fmt:message key="invalid.input"/></p>
                                     </c:if>
 
+                                    <c:if test="${param.userExist == false}">
+                                        <p style="color: darkblue"><fmt:message key="user.not.found"/></p>
+                                    </c:if>
 
-<%--                                    <c:if test="${ param.userExist != null and param.userExist == false}">--%>
-<%--                                        <p style="color: darkred"><fmt:message key="user.not.found"/></p>--%>
-<%--                                    </c:if>--%>
 
                                     <div class="form-group">
                                         <label class="small mb-1" for="email">

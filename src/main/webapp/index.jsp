@@ -1,5 +1,5 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:forward page="app/log-me"/>
+<jsp:forward page="app/calc-me"/>
 

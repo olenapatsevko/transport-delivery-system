@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class UserDomain {
 
-    private  int id;
+
     private  String firstName;
     private  String secondName;
     private  String email;
@@ -15,7 +15,7 @@ public class UserDomain {
     private  Role role;
 
     public UserDomain(Builder builder) {
-        this.id = builder.id;
+
         this.firstName = builder.firstName;
         this.secondName = builder.secondName;
         this.email = builder.email;
@@ -30,7 +30,7 @@ public class UserDomain {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDomain user = (UserDomain) o;
-        return id == user.id &&
+        return
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(secondName, user.secondName) &&
                 Objects.equals(email, user.email) &&
@@ -41,16 +41,14 @@ public class UserDomain {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, secondName, email, password, phone, role);
+        return Objects.hash( firstName, secondName, email, password, phone, role);
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getFirstName() {
         return firstName;
@@ -79,8 +77,7 @@ public class UserDomain {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                " firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + "[*******]" + '\'' +
@@ -92,7 +89,7 @@ public class UserDomain {
 
 
     public static class Builder {
-        private int id;
+
         private String firstName;
         private String secondName;
         private String email;
@@ -104,10 +101,7 @@ public class UserDomain {
             return new UserDomain(this);
         }
 
-        public Builder withId(int id) {
-            this.id = id;
-            return this;
-        }
+
 
         public Builder withFirstName(String firstName) {
             this.firstName = firstName;

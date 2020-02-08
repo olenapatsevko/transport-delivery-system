@@ -8,14 +8,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DeliveryTypeCrudDaoImplImplTest {
+public class DeliveryTypeDaoImplImplTest {
     DataBaseConnector connector ;
-    DeliveryTypeCrudDaoImplImpl deliveryType;
+    DeliveryTypeDaoImplImpl deliveryType;
 
     @Before
     public void initDb(){
         connector = new DataBaseConnector("h2");
-        deliveryType = new DeliveryTypeCrudDaoImplImpl(connector);
+        deliveryType = new DeliveryTypeDaoImplImpl(connector);
         DataBaseConnectorTest.initTestDb(connector);
     }
 

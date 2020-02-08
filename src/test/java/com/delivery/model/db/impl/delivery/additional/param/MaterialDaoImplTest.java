@@ -2,22 +2,21 @@ package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.DataBaseConnectorTest;
-import com.delivery.model.entity.bill.DeliveryType;
 import com.delivery.model.entity.bill.Material;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ShipmentMaterialDaoImplTest {
+public class MaterialDaoImplTest {
     DataBaseConnector connector ;
-    ShipmentMaterialDaoImpl shipmentMaterialDao;
+    MaterialDaoImpl shipmentMaterialDao;
 
 
     @Before
   public void initDb(){
        connector = new DataBaseConnector("h2");
-       shipmentMaterialDao = new ShipmentMaterialDaoImpl(connector);
+       shipmentMaterialDao = new MaterialDaoImpl(connector);
        DataBaseConnectorTest.initTestDb(connector);
 
     }

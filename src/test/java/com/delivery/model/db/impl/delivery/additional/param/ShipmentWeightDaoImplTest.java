@@ -2,7 +2,6 @@ package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.DataBaseConnectorTest;
-import com.delivery.model.entity.bill.DeliveryType;
 import com.delivery.model.entity.bill.Weight;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,12 +11,12 @@ import static org.junit.Assert.assertNull;
 
 public class ShipmentWeightDaoImplTest {
     DataBaseConnector connector ;
-    ShipmentWeightDaoImpl shipmentWeightDao;
+    WeightDaoImpl shipmentWeightDao;
 
     @Before
     public void initDb(){
         connector = new DataBaseConnector("h2");
-        shipmentWeightDao = new ShipmentWeightDaoImpl(connector);
+        shipmentWeightDao = new WeightDaoImpl(connector);
         DataBaseConnectorTest.initTestDb(connector);
     }
     @Test

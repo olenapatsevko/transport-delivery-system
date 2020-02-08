@@ -1,11 +1,17 @@
 package com.delivery.controller;
 
 import com.delivery.controller.command.Command;
+import com.delivery.controller.command.actions.CalculateDelivery;
 import com.delivery.controller.command.directions.CalculateMe;
 import com.delivery.controller.command.directions.Home;
 import com.delivery.controller.command.directions.LogMe;
 import com.delivery.controller.command.directions.RegMe;
-import com.delivery.controller.command.profile.*;
+import com.delivery.controller.command.account.Login;
+import com.delivery.controller.command.account.Logout;
+import com.delivery.controller.command.account.PersonalCabinet;
+import com.delivery.controller.command.account.Registration;
+import com.delivery.controller.injector.ApplicationInjector;
+import com.delivery.model.utility.DeliveryUtility;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,24 +23,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.delivery.controller.command.TextConstants.CommandPaths.*;
-import static com.delivery.controller.command.TextConstants.Parameters.CALCULATOR;
-import static com.delivery.controller.command.TextConstants.Routes.*;
+import static com.delivery.controller.command.TextConstants.Parameters.CALCULATE;
+import static com.delivery.controller.command.TextConstants.Routes.EMPTY_STRING;
+import static com.delivery.controller.command.TextConstants.Routes.REDIRECT;
 
 public class FrontController extends HttpServlet {
 
     private static final Map<String, Command> actions = new HashMap<>();
 
+
     @Override
     public void init(ServletConfig config)  {
         actions.put(REGISTRATION,
-                new Registration());
+                new Registration(ApplicationInjector.getUserService()));
         actions.put(LOGIN,
-                new Login());
+                new Login(ApplicationInjector.getUserService()));
         actions.put(LOGOUT,
                 new Logout());
         actions.put(PERSONAL_CABINET,
                 new PersonalCabinet());
-        actions.put(CALCULATOR, new CalculateMe());
+        actions.put(CALCULATE, new CalculateDelivery());
 
         //directions
         actions.put(HOME,
@@ -43,7 +51,7 @@ public class FrontController extends HttpServlet {
                 new RegMe());
         actions.put(LOG_ME,
                 new LogMe());
-        actions.put(TO_CALCULATOR_REDIRECT,new CalculateMe());
+        actions.put(CALC_ME, new CalculateMe());
     }
 
 
@@ -65,7 +73,7 @@ public class FrontController extends HttpServlet {
 
         Command command = actions.getOrDefault(path, (req, resp) -> DEFAULT_PATH);
         String page = command.execute(request, response);
-
+        request.setAttribute("towns", DeliveryUtility.getListOfTowns());
         if (page.contains(REDIRECT)) {
             response.sendRedirect(page.replace(REDIRECT, EMPTY_STRING));
         } else {

@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class DeliveryTypeCrudDaoImplImpl extends AbstractEnumCrudDaoImpl<DeliveryType> {
+public class DeliveryTypeDaoImplImpl extends AbstractEnumCrudDaoImpl<DeliveryType> {
     private static final String FIND_BY_ID = "SELECT * FROM delivery WHERE name=?";
     private static final String DELETE_BY_ID = "DELETE FROM delivery WHERE name = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM delivery ";
     private static final String FIND_ALL = "SELECT * FROM delivery";
     private static final String FIND_BY_NAME = "SELECT * from delivery where name = ?";
 
-    public DeliveryTypeCrudDaoImplImpl(DataBaseConnector connector) {
+    public DeliveryTypeDaoImplImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL);
     }
 

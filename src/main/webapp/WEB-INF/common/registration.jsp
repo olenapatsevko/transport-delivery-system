@@ -32,25 +32,43 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4"><fmt:message key="create.account"/></h3></div>
                             <div class="card-body">
-                                <form>
+                                <form method="post" action="${pageContext.request.contextPath}/app/registration">
+
+                                    <c:if test="${param.dataInvalid == true}">
+                                        <p style="color: orange"><fmt:message key="invalid.input"/></p>
+                                    </c:if>
+                                    <c:if test="${param.success == true}">
+                                        <p style="color: green"><fmt:message key="reg.success"/></p>
+                                    </c:if>
+                                    <c:if test="${param.alreadyExist == true}">
+                                        <p style="color: darkred"><fmt:message key="user.exist"/></p>
+                                    </c:if>
                                     <div class="form-row">
+
                                         <div class="col-md-6">
-                                            <div class="form-group"><label class="small mb-1" for="inputFirstName"><fmt:message key="first.name"/></label><input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" /></div>
+                                            <div class="form-group"><label class="small mb-1" for="firstName"><fmt:message key="first.name"/></label><input class="form-control py-4" id="firstName" name="firstName" type="text" placeholder="<fmt:message key="enter"/> <fmt:message key="first.name"/>" /></div>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <div class="form-group"><label class="small mb-1" for="inputLastName"><fmt:message key="last.name"/></label><input class="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" /></div>
+                                            <div class="form-group"><label class="small mb-1" for="lastName"><fmt:message key="last.name"/></label><input class="form-control py-4" id="lastName" name="lastName" type="text" placeholder="<fmt:message key="enter"/> <fmt:message key="last.name"/>" /></div>
                                         </div>
+
                                     </div>
-                                    <div class="form-group"><label class="small mb-1" for="inputEmailAddress"><fmt:message key="email"/></label><input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" /></div>
+                                    <div class="form-group"><label class="small mb-1" for="email"><fmt:message key="email"/></label><input class="form-control py-4" id="email" name="email" type="email" aria-describedby="emailHelp" placeholder="<fmt:message key="enter"/> <fmt:message key="email"/>" /></div>
                                     <div class="form-row">
+
                                         <div class="col-md-6">
-                                            <div class="form-group"><label class="small mb-1" for="inputPassword"><fmt:message key="password"/></label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                                            <div class="form-group"><label class="small mb-1" for="password"><fmt:message key="password"/></label><input class="form-control py-4" id="password" name="password" type="password" placeholder="<fmt:message key="enter"/> <fmt:message key="password"/>" /></div>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <div class="form-group"><label class="small mb-1" for="inputConfirmPassword"><fmt:message key="confirm.password"/></label><input class="form-control py-4" id="inputConfirmPassword" type="password" placeholder="Confirm password" /></div>
+                                            <div class="form-group"><label class="small mb-1" for="phone"><fmt:message key="phone"/></label><input class="form-control py-4" id="phone" name="phone" type="number" min="11" placeholder="<fmt:message key="phone"/>" /></div>
                                         </div>
+
                                     </div>
-                                    <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html"><fmt:message key="confirm.password"/></a></div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <fmt:message key="register"/>
+                                    </button>
                                 </form>
                             </div>
                             <div class="card-footer text-center">

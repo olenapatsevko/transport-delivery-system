@@ -1,4 +1,4 @@
-package com.delivery.controller.command.profile;
+package com.delivery.controller.command.account;
 
 import com.delivery.controller.command.Command;
 import com.delivery.controller.command.CommandUtil;

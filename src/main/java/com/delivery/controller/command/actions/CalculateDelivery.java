@@ -7,9 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.delivery.controller.command.TextConstants.Routes.TO_CALCULATOR_REDIRECT;
+
 public class CalculateDelivery implements Command {
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return null;
+    public String execute(HttpServletRequest request, HttpServletResponse response)  {
+
+        //todo print the price value
+
+        return TO_CALCULATOR_REDIRECT;
     }
 }

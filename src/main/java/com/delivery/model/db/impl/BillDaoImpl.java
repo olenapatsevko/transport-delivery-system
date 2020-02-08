@@ -23,7 +23,7 @@ public class BillDaoImpl extends AbstractDaoImpl<Bill> implements BillDao {
     private static final String SAVE_ENTITY = "INSERT INTO bill (id, shipment, payment, delivery, size, weight, material) VALUES (?, ?, ?, ?, ?, ?, ? )";
     private static final String UPDATE_ALL = "UPDATE bill SET  shipment = ? , payment = ? , delivery = ? , size = ? , weight = ? , material = ? WHERE id = ?";
 
-    protected BillDaoImpl(DataBaseConnector connector) {
+    public BillDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
     }
 

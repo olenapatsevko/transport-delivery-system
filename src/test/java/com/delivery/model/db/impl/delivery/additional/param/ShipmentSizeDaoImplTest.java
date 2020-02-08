@@ -2,7 +2,6 @@ package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.DataBaseConnectorTest;
-import com.delivery.model.entity.bill.DeliveryType;
 import com.delivery.model.entity.bill.Size;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,13 +11,13 @@ import static org.junit.Assert.assertNull;
 
 public class ShipmentSizeDaoImplTest {
     DataBaseConnector connector ;
-    ShipmentSizeDaoImpl shipmentSizeDao;
+    SizeDaoImpl shipmentSizeDao;
 
 
     @Before
     public void initDb(){
         connector = new DataBaseConnector("h2");
-        shipmentSizeDao = new ShipmentSizeDaoImpl(connector);
+        shipmentSizeDao = new SizeDaoImpl(connector);
         DataBaseConnectorTest.initTestDb(connector);
 
     }

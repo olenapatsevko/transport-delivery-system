@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class OrderStatusCrudDaoImpl extends AbstractEnumCrudDaoImpl<OrderStatus> {
+public class OrderStatusDaoImpl extends AbstractEnumCrudDaoImpl<OrderStatus> {
     private static final String FIND_BY_ID = "SELECT * FROM status WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM status WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM status ";
     private static final String FIND_ALL = "SELECT * FROM status";
     private static final String FIND_BY_NAME = "SELECT * from status where name = ?";
 
-    public OrderStatusCrudDaoImpl(DataBaseConnector connector) {
+    public OrderStatusDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL);
     }
 

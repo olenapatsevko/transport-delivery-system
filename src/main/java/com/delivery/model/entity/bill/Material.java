@@ -7,6 +7,10 @@ public enum Material {
 
     float coefficient;
 
+    public float getCoefficient(){
+        return coefficient;
+    }
+
     Material(float coefficient) {
 
         this.coefficient = coefficient;

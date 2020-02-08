@@ -17,7 +17,7 @@ public class ShipmentDaoImpl extends AbstractDaoImpl<Shipment> implements CrudPa
     private static final String SAVE_ENTITY = "INSERT INTO shipment (id, weight, height, width, length, orders) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE_ALL = "UPDATE shipment SET  weight = ? , height = ? , width = ? , length = ? , orders = ?   WHERE id = ?";
 
-    protected ShipmentDaoImpl(DataBaseConnector connector) {
+    public ShipmentDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
     }
 
