@@ -2,12 +2,9 @@ package com.delivery.model.db.impl;
 
 
 import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.UserDao;
 import com.delivery.model.db.impl.core.AbstractDaoImpl;
 import com.delivery.model.entity.Role;
 import com.delivery.model.entity.User;
-import com.delivery.model.exeption.SqlRuntimeException;
-import com.delivery.model.service.PasswordEncryption;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 
-public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
+public class UserDao extends AbstractDaoImpl<User> implements com.delivery.model.db.UserDao {
     private static final String FIND_BY_ID = "SELECT * FROM user WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM user WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM user ";
@@ -26,8 +23,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
     private static final String SAVE_ENTITY = "INSERT into user (id, name, surname, password, phone, email, role) VALUES (null, ?, ?, ?, ?, ?, ?)";
 
 
-
-    public UserDaoImpl(DataBaseConnector connector) {
+    public UserDao(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
     }
 

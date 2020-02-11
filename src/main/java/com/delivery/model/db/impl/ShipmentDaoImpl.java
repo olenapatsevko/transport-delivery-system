@@ -14,8 +14,8 @@ public class ShipmentDaoImpl extends AbstractDaoImpl<Shipment> implements CrudPa
     private static final String DELETE_BY_ID = "DELETE FROM shipment WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM shipment ";
     private static final String FIND_ALL_LIMIT = "SELECT * FROM shipment LIMIT ?, ?";
-    private static final String SAVE_ENTITY = "INSERT INTO shipment (id, weight, height, width, length, orders) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_ALL = "UPDATE shipment SET  weight = ? , height = ? , width = ? , length = ? , orders = ?   WHERE id = ?";
+    private static final String SAVE_ENTITY = "INSERT INTO shipment (id, weight, height, width, length) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE_ALL = "UPDATE shipment SET weight = ? , height = ? , width = ? , length = ? WHERE id = ?";
 
     public ShipmentDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
@@ -29,7 +29,6 @@ public class ShipmentDaoImpl extends AbstractDaoImpl<Shipment> implements CrudPa
                 .withHeight(resultSet.getFloat("height"))
                 .withWidth(resultSet.getFloat("width"))
                 .withLength(resultSet.getFloat("length"))
-                .withOrder(new OrderDaoImpl(this.connector).findById(resultSet.getInt("orders")).get())
                 .build();
     }
 
@@ -39,8 +38,7 @@ public class ShipmentDaoImpl extends AbstractDaoImpl<Shipment> implements CrudPa
                 statement.setFloat(2,entity.getHeight());
                 statement.setFloat(3,entity.getWidth());
                 statement.setFloat(4,entity.getLength());
-                statement.setInt(5, entity.getOrder().getId());
-                statement.setInt(6, entity.getId());
+                statement.setInt(5, entity.getId());
     }
 
     @Override
@@ -50,6 +48,6 @@ public class ShipmentDaoImpl extends AbstractDaoImpl<Shipment> implements CrudPa
         preparedStatement.setFloat(3, entity.getHeight());
         preparedStatement.setFloat(4, entity.getWidth());
         preparedStatement.setFloat(5, entity.getLength());
-        preparedStatement.setInt(6, entity.getOrder().getId());
+
     }
 }

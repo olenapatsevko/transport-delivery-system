@@ -12,7 +12,7 @@ public class UserValidatorTest {
 
 
     @Test
-    public void test(){
+    public void validationEmailTrue(){
         assertTrue(userValidator.validate("email@gmai.com", "email"));
 
     }

@@ -10,25 +10,40 @@ import java.util.Objects;
 public class Bill {
 
     private final int id;
-    private final Shipment shipment;
+    private final Order order;
     private final boolean payment;
     private final DeliveryType deliveryType;
     private final Size size;
     private final Weight weight;
     private final Material material;
+    private final float totalValue;
 
     public Bill(Builder builder) {
         this.id = builder.id;
-        this.shipment = builder.shipment;
+        this.order = builder.order;
         this.payment = builder.payment;
         this.deliveryType = builder.deliveryType;
         this.size = builder.size;
         this.weight = builder.weight;
         this.material = builder.material;
+        this.totalValue = builder.totalValue;
     }
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id=" + id +
+                ", order=" + order +
+                ", payment=" + payment +
+                ", deliveryType=" + deliveryType +
+                ", size=" + size +
+                ", weight=" + weight +
+                ", material=" + material +
+                '}';
     }
 
     @Override
@@ -38,7 +53,7 @@ public class Bill {
         Bill bill = (Bill) o;
         return id == bill.id &&
                 payment == bill.payment &&
-                Objects.equals(shipment, bill.shipment) &&
+                Objects.equals(order, bill.order) &&
                 deliveryType == bill.deliveryType &&
                 size == bill.size &&
                 weight == bill.weight &&
@@ -47,15 +62,18 @@ public class Bill {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, shipment, payment, deliveryType, size, weight, material);
+        return Objects.hash(id, order, payment, deliveryType, size, weight, material);
     }
 
     public int getId() {
         return id;
     }
+    public float getTotalValue(){
+        return totalValue;
+    }
 
-    public Shipment getShipment() {
-        return shipment;
+    public Order getOrder() {
+        return order;
     }
 
     public boolean isPayment() {
@@ -78,27 +96,15 @@ public class Bill {
         return material;
     }
 
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "id=" + id +
-                ", shipment=" + shipment +
-                ", payment=" + payment +
-                ", deliveryType=" + deliveryType +
-                ", size=" + size +
-                ", weight=" + weight +
-                ", shipmentMaterial=" + material +
-                '}';
-    }
-
     public static class Builder {
         private int id;
-        private Shipment shipment;
+        private Order order;
         private boolean payment;
         private DeliveryType deliveryType;
         private Size size;
         private Weight weight;
         private Material material;
+        private float totalValue;
 
         public Bill build() {
             return new Bill(this);
@@ -109,8 +115,13 @@ public class Bill {
             return this;
         }
 
-        public Builder withShipment(Shipment shipment) {
-            this.shipment = shipment;
+        public Builder withTotalValue(float totalValue){
+            this.totalValue = totalValue;
+            return this;
+
+        }
+        public Builder withOrder(Order order) {
+            this.order = order;
             return this;
         }
 

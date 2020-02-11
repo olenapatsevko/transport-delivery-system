@@ -1,14 +1,14 @@
 package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.impl.core.AbstractEnumCrudDaoImpl;
+import com.delivery.model.db.impl.core.AbstractUnchangeableCrudDaoImpl;
 import com.delivery.model.entity.OrderStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class OrderStatusDaoImpl extends AbstractEnumCrudDaoImpl<OrderStatus> {
+public class OrderStatusDaoImpl extends AbstractUnchangeableCrudDaoImpl<OrderStatus> {
     private static final String FIND_BY_ID = "SELECT * FROM status WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM status WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM status ";

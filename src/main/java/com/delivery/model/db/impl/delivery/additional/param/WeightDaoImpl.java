@@ -1,17 +1,14 @@
 package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.impl.core.AbstractEnumCrudDaoImpl;
-import com.delivery.model.entity.Shipment;
-import com.delivery.model.entity.bill.DeliveryType;
-import com.delivery.model.entity.bill.Size;
+import com.delivery.model.db.impl.core.AbstractUnchangeableCrudDaoImpl;
 import com.delivery.model.entity.bill.Weight;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class WeightDaoImpl extends AbstractEnumCrudDaoImpl<Weight> {
+public class WeightDaoImpl extends AbstractUnchangeableCrudDaoImpl<Weight> {
     private static final String FIND_BY_ID = "SELECT * FROM weight WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM weight WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM weight ";

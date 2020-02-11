@@ -28,13 +28,13 @@ public class AccessFilter implements Filter {
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
         allowedRoutes.put(Role.USER,
-                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION,  PERSONAL_CABINET
+                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION,  PERSONAL_CABINET, MAKE_ORDER
                         )
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
         allowedRoutes.put(Role.ADMIN,
-                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, PERSONAL_CABINET)
+                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, PERSONAL_CABINET, MAKE_ORDER)
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
     }
@@ -72,6 +72,6 @@ public class AccessFilter implements Filter {
 
     @Override
     public void destroy() {
-        //decause it should be implemented
+        //because it should be implemented
     }
 }

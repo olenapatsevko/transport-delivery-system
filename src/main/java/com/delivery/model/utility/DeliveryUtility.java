@@ -1,6 +1,7 @@
 package com.delivery.model.utility;
 
 import com.delivery.controller.injector.ApplicationInjector;
+import com.delivery.model.entity.Bill;
 import com.delivery.model.entity.Place;
 import com.delivery.model.entity.bill.Material;
 
@@ -15,6 +16,10 @@ public final class DeliveryUtility {
 
     public static List<String> getListOfMaterials(){
         return ApplicationInjector.getMaterialDao().findAll().stream().map(Material::toString).collect(Collectors.toList());
+    }
+
+    public static List<Bill> getListOfBillForUser(){
+        return null;
     }
 
 }

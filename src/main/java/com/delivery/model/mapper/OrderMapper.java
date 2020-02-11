@@ -1,5 +1,6 @@
 package com.delivery.model.mapper;
 
+import com.delivery.controller.injector.ApplicationInjector;
 import com.delivery.model.domain.OrderDomain;
 import com.delivery.model.entity.Order;
 
@@ -10,10 +11,11 @@ public class OrderMapper implements Mapper<Order, OrderDomain> {
     public OrderDomain mapToDomain(Order order) {
         return OrderDomain.builder()
                 .withAddress(order.getAddress())
-                .withDestination(order.getDestination())
+                .withDestination(new PlaceMapper().mapToDomain(order.getDestination()))
                 .withId(order.getId())
                 .withOrderStatus(order.getOrderStatus())
-                .withSender(order.getSender())
+                .withSender(new UserMapper(ApplicationInjector.getPasswordEncryption()).mapToDomain(order.getSender()))
+                .withLocalDateTime(order.getDeliveryDate())
                 .build();
     }
 
@@ -21,10 +23,11 @@ public class OrderMapper implements Mapper<Order, OrderDomain> {
     public Order mapToEntity(OrderDomain order) {
         return Order.builder()
                 .withAddress(order.getAddress())
-                .withDestination(order.getDestination())
+                .withDestination(new PlaceMapper().mapToEntity(order.getDestination()))
                 .withId(order.getId())
                 .withOrderStatus(order.getOrderStatus())
-                .withSender(order.getSender())
+                .withDeliveryDate(order.getLocalDateTime())
+                .withSender(ApplicationInjector.getUserMapper().mapToEntity(order.getSender()))
                 .build();
     }
 }

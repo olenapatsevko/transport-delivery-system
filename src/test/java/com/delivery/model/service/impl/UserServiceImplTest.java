@@ -1,18 +1,14 @@
 package com.delivery.model.service.impl;
 
-import com.delivery.model.db.impl.UserDaoImpl;
+import com.delivery.model.db.impl.UserDao;
 import com.delivery.model.domain.UserDomain;
-import com.delivery.model.entity.Role;
 import com.delivery.model.entity.User;
 import com.delivery.model.service.validator.UserValidator;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
@@ -22,7 +18,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
     @Mock
-    private UserDaoImpl userDao;
+    private UserDao userDao;
     @Mock
     private UserValidator userValidator;
     @InjectMocks

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface BillDao extends CrudPageableDao<Bill> {
 
-   List<Bill> findAllBillsForUser(User user);
+   List<Bill> findAllBillsForUser(int page, int perPage , String email);
 }

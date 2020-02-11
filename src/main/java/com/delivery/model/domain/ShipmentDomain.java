@@ -12,13 +12,13 @@ public class ShipmentDomain {
         private  float height;
         private  float width;
         private  float length;
-        private  Order order;
+
 
         public ShipmentDomain(Builder builder) {
             this.id = builder.id;
             this.height = builder.height;
             this.length = builder.length;
-            this.order = builder.order;
+
             this.width = builder.width;
             this.weight = builder.weight;
         }
@@ -36,13 +36,12 @@ public class ShipmentDomain {
                     Float.compare(shipment.weight, weight) == 0 &&
                     Float.compare(shipment.height, height) == 0 &&
                     Float.compare(shipment.width, width) == 0 &&
-                    Float.compare(shipment.length, length) == 0 &&
-                    Objects.equals(order, shipment.order);
+                    Float.compare(shipment.length, length) == 0;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, weight, height, width, length, order);
+            return Objects.hash(id, weight, height, width, length);
         }
 
         public int getId() {
@@ -65,9 +64,7 @@ public class ShipmentDomain {
             return length;
         }
 
-        public Order getOrder() {
-            return order;
-        }
+
 
         @Override
         public String toString() {
@@ -77,7 +74,6 @@ public class ShipmentDomain {
                     ", height=" + height +
                     ", width=" + width +
                     ", length=" + length +
-                    ", order=" + order +
                     '}';
         }
 
@@ -87,7 +83,7 @@ public class ShipmentDomain {
             private float height;
             private float width;
             private float length;
-            private Order order;
+
 
             public ShipmentDomain build() {
                 return new ShipmentDomain(this);
@@ -118,9 +114,6 @@ public class ShipmentDomain {
                 return this;
             }
 
-            public Builder withOrder(Order order) {
-                this.order = order;
-                return this;
-            }
+
         }
 }

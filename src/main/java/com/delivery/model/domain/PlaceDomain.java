@@ -13,6 +13,12 @@ public class PlaceDomain {
         this.city = city;
     }
 
+    public PlaceDomain(String city){
+        this.region = "";
+        this.country = "";
+        this.city = city;
+    }
+
     public String getCountry() {
         return country;
     }

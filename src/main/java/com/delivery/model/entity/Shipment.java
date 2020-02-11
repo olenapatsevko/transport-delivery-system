@@ -9,13 +9,11 @@ public class Shipment {
     private final float height;
     private final float width;
     private final float length;
-    private final Order order;
 
     public Shipment(Builder builder) {
         this.id = builder.id;
         this.height = builder.height;
         this.length = builder.length;
-        this.order = builder.order;
         this.width = builder.width;
         this.weight = builder.weight;
     }
@@ -33,13 +31,13 @@ public class Shipment {
                 Float.compare(shipment.weight, weight) == 0 &&
                 Float.compare(shipment.height, height) == 0 &&
                 Float.compare(shipment.width, width) == 0 &&
-                Float.compare(shipment.length, length) == 0 &&
-                Objects.equals(order, shipment.order);
+                Float.compare(shipment.length, length) == 0;
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, weight, height, width, length, order);
+        return Objects.hash(id, weight, height, width, length);
     }
 
     public int getId() {
@@ -62,9 +60,6 @@ public class Shipment {
         return length;
     }
 
-    public Order getOrder() {
-        return order;
-    }
 
     @Override
     public String toString() {
@@ -74,7 +69,6 @@ public class Shipment {
                 ", height=" + height +
                 ", width=" + width +
                 ", length=" + length +
-                ", order=" + order +
                 '}';
     }
 
@@ -84,7 +78,7 @@ public class Shipment {
         private float height;
         private float width;
         private float length;
-        private Order order;
+
 
         public Shipment build() {
             return new Shipment(this);
@@ -115,10 +109,7 @@ public class Shipment {
             return this;
         }
 
-        public Builder withOrder(Order order) {
-            this.order = order;
-            return this;
-        }
+
     }
 
 }

@@ -15,7 +15,6 @@ public class UserValidator {
 
     public void validate(User user) {
         if (!(stringReg.validate(user, User::getEmail, "email") && stringReg.validate(user, User::getPassword, "password"))) {
-            System.out.println(user.getPassword());
             throw new ValidationException("User Validation failed: "+user.toString() );
         }
 
@@ -32,12 +31,12 @@ public class UserValidator {
          {
             map.put("email", "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
             map.put("password", "(?=.*[a-z])(?=.*[A-Z]).{6,30}");
+            map.put("address", ".{6,200}");
          }
 
          boolean validate(User user, Function<User, String> function, String key) {
             pattern = Pattern.compile(map.get(key));
             matcher = pattern.matcher(function.apply(user));
-             System.out.println(matcher.matches());
             return matcher.matches();
         }
 

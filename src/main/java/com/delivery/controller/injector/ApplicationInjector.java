@@ -4,43 +4,48 @@ import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.impl.*;
 import com.delivery.model.db.impl.delivery.additional.param.*;
 import com.delivery.model.mapper.*;
+import com.delivery.model.service.DeliveryCalculation;
 import com.delivery.model.service.PasswordEncryption;
 import com.delivery.model.service.UserService;
 import com.delivery.model.service.impl.DeliveryCalculationImpl;
+import com.delivery.model.service.impl.OrderServiceImpl;
 import com.delivery.model.service.impl.UserServiceImpl;
 import com.delivery.model.service.validator.UserValidator;
 
 public class ApplicationInjector {
     private static final DataBaseConnector DATA_BASE_CONNECTOR = new DataBaseConnector();
     private static final UserValidator USER_VALIDATOR = new UserValidator();
-    public static final PasswordEncryption PASSWORD_ENCRYPTION = new PasswordEncryption();
+    private static final PasswordEncryption PASSWORD_ENCRYPTION = new PasswordEncryption();
 
-    //dao
-    private static final UserDaoImpl USER_DAO = new UserDaoImpl(DATA_BASE_CONNECTOR);
+    private static final UserDao USER_DAO = new UserDao(DATA_BASE_CONNECTOR);
     private static final PlaceDaoImpl PLACE_DAO = new PlaceDaoImpl(DATA_BASE_CONNECTOR);
-    public static final OrderDaoImpl ORDER_DAO = new OrderDaoImpl(DATA_BASE_CONNECTOR);
-    public static final BillDaoImpl BILL_DAO = new BillDaoImpl(DATA_BASE_CONNECTOR);
-    public static final ShipmentDaoImpl SHIPMENT_DAO = new ShipmentDaoImpl(DATA_BASE_CONNECTOR);
-    public static final DeliveryTypeDaoImplImpl DELIVERY_TYPE_DAO = new DeliveryTypeDaoImplImpl(DATA_BASE_CONNECTOR);
-    public static final MaterialDaoImpl MATERIAL_DAO = new MaterialDaoImpl(DATA_BASE_CONNECTOR);
-    public static final OrderStatusDaoImpl STATUS_DAO = new OrderStatusDaoImpl(DATA_BASE_CONNECTOR);
-    public static final SizeDaoImpl SIZE_DAO = new SizeDaoImpl(DATA_BASE_CONNECTOR);
-    public static final WeightDaoImpl WEIGHT_DAO = new WeightDaoImpl(DATA_BASE_CONNECTOR);
+    private static final OrderDaoImpl ORDER_DAO = new OrderDaoImpl(DATA_BASE_CONNECTOR);
+    private static final BillDaoImpl BILL_DAO = new BillDaoImpl(DATA_BASE_CONNECTOR);
+    private static final ShipmentDaoImpl SHIPMENT_DAO = new ShipmentDaoImpl(DATA_BASE_CONNECTOR);
+    private static final DeliveryTypeDaoImplImpl DELIVERY_TYPE_DAO = new DeliveryTypeDaoImplImpl(DATA_BASE_CONNECTOR);
+    private static final MaterialDaoImpl MATERIAL_DAO = new MaterialDaoImpl(DATA_BASE_CONNECTOR);
+    private static final OrderStatusDaoImpl STATUS_DAO = new OrderStatusDaoImpl(DATA_BASE_CONNECTOR);
+    private static final SizeDaoImpl SIZE_DAO = new SizeDaoImpl(DATA_BASE_CONNECTOR);
+    private static final WeightDaoImpl WEIGHT_DAO = new WeightDaoImpl(DATA_BASE_CONNECTOR);
 
-   //mapper
-    public static final UserMapper USER_MAPPER = new UserMapper(PASSWORD_ENCRYPTION);
-    public static final PlaceMapper PLACE_MAPPER = new PlaceMapper();
-    public static final OrderMapper ORDER_MAPPER = new OrderMapper();
-    public static final ShipmentMapper SHIPMENT_MAPPER = new ShipmentMapper();
-    public static final BillMapper BILL_MAPPER = new BillMapper();
+    private static final UserMapper USER_MAPPER = new UserMapper(PASSWORD_ENCRYPTION);
+    private static final PlaceMapper PLACE_MAPPER = new PlaceMapper();
+    private static final OrderMapper ORDER_MAPPER = new OrderMapper();
+    private static final ShipmentMapper SHIPMENT_MAPPER = new ShipmentMapper();
+    private static final BillMapper BILL_MAPPER = new BillMapper();
 
-    //services
-    public static final DeliveryCalculationImpl DELIVERY_CALCULATION = new DeliveryCalculationImpl(PLACE_MAPPER,PLACE_DAO);
+    private static final DeliveryCalculation DELIVERY_CALCULATION = new DeliveryCalculationImpl(PLACE_MAPPER,PLACE_DAO);
     private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_VALIDATOR, USER_MAPPER, PASSWORD_ENCRYPTION);
+    private static final OrderServiceImpl ORDER_SERVICE = new OrderServiceImpl(USER_DAO, BILL_DAO, SHIPMENT_DAO, ORDER_DAO, PLACE_DAO, DELIVERY_CALCULATION, SHIPMENT_MAPPER, USER_VALIDATOR);
 
     private static final ApplicationInjector INSTANCE = new ApplicationInjector();
 
     private ApplicationInjector() {
+    }
+
+
+    public static OrderServiceImpl getOrderService() {
+        return ORDER_SERVICE;
     }
 
     public static ApplicationInjector getInstance() {
@@ -60,7 +65,7 @@ public class ApplicationInjector {
         return PASSWORD_ENCRYPTION;
     }
 
-    public static UserDaoImpl getUserDao() {
+    public static UserDao getUserDao() {
         return USER_DAO;
     }
 
@@ -120,7 +125,7 @@ public class ApplicationInjector {
         return BILL_MAPPER;
     }
 
-    public static DeliveryCalculationImpl getDeliveryCalculation() {
+    public static DeliveryCalculation getDeliveryCalculation() {
         return DELIVERY_CALCULATION;
     }
 

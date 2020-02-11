@@ -1,16 +1,14 @@
 package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.impl.core.AbstractEnumCrudDaoImpl;
-import com.delivery.model.entity.OrderStatus;
-import com.delivery.model.entity.bill.DeliveryType;
+import com.delivery.model.db.impl.core.AbstractUnchangeableCrudDaoImpl;
 import com.delivery.model.entity.bill.Material;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class MaterialDaoImpl extends AbstractEnumCrudDaoImpl<Material> {
+public class MaterialDaoImpl extends AbstractUnchangeableCrudDaoImpl<Material> {
     private static final String FIND_BY_ID = "SELECT * FROM material WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM material WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM material ";

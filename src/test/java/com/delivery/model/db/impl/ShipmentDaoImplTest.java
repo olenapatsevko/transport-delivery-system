@@ -27,11 +27,7 @@ public class ShipmentDaoImplTest {
         assertEquals(2, shipmentDao.findAll(1,3).size());
     }
 
-    @Test
-    public void findShipmentById(){
-        assertEquals("mwealleans0@godaddy.com",
-                shipmentDao.findById(1).get().getOrder().getSender().getEmail());
-    }
+
 
     @Test
     public void countOrders(){
@@ -53,10 +49,6 @@ public class ShipmentDaoImplTest {
                 .withLength(234f)
                 .withWeight(34f)
                 .withWidth(23f)
-                .withOrder(shipmentDao
-                        .findById(1)
-                        .get()
-                        .getOrder())
                 .build());
         assertEquals(34f , shipmentDao.findById(1).get().getWeight(), 0.0);
     }

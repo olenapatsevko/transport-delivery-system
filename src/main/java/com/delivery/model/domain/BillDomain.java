@@ -1,6 +1,5 @@
 package com.delivery.model.domain;
 
-import com.delivery.model.entity.Shipment;
 import com.delivery.model.entity.bill.DeliveryType;
 import com.delivery.model.entity.bill.Material;
 import com.delivery.model.entity.bill.Size;
@@ -10,21 +9,23 @@ import java.util.Objects;
 
 public class BillDomain {
     private int id;
-    private Shipment shipment;
     private boolean payment;
     private DeliveryType deliveryType;
     private Size size;
     private Weight weight;
     private Material material;
+    private OrderDomain orderDomain;
+    private float totalValue;
 
     public BillDomain(Builder builder) {
         this.id = builder.id;
-        this.shipment = builder.shipment;
+        this.orderDomain = builder.orderDomain;
         this.payment = builder.payment;
         this.deliveryType = builder.deliveryType;
         this.size = builder.size;
         this.weight = builder.weight;
         this.material = builder.material;
+        this.totalValue = builder.totalValue;
     }
 
     public static Builder builder() {
@@ -39,7 +40,7 @@ public class BillDomain {
         BillDomain bill = (BillDomain) o;
         return id == bill.id &&
                 payment == bill.payment &&
-                Objects.equals(shipment, bill.shipment) &&
+                Objects.equals(orderDomain, bill.orderDomain) &&
                 deliveryType == bill.deliveryType &&
                 size == bill.size &&
                 weight == bill.weight &&
@@ -48,15 +49,15 @@ public class BillDomain {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, shipment, payment, deliveryType, size, weight, material);
+        return Objects.hash(id, orderDomain, payment, deliveryType, size, weight, material);
     }
 
     public int getId() {
         return id;
     }
 
-    public Shipment getShipment() {
-        return shipment;
+    public OrderDomain getOrder() {
+        return orderDomain;
     }
 
     public boolean isPayment() {
@@ -75,6 +76,10 @@ public class BillDomain {
         return weight;
     }
 
+    public float getTotalValue() {
+        return totalValue;
+    }
+
     public Material getMaterial() {
         return material;
     }
@@ -83,7 +88,7 @@ public class BillDomain {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", shipment=" + shipment +
+                ", orderdDomain=" + orderDomain +
                 ", payment=" + payment +
                 ", deliveryType=" + deliveryType +
                 ", size=" + size +
@@ -94,12 +99,13 @@ public class BillDomain {
 
     public static class Builder {
         private int id;
-        private Shipment shipment;
+        private OrderDomain orderDomain;
         private boolean payment;
         private DeliveryType deliveryType;
         private Size size;
         private Weight weight;
         private Material material;
+        private float totalValue;
 
         public BillDomain build() {
             return new BillDomain(this);
@@ -110,8 +116,13 @@ public class BillDomain {
             return this;
         }
 
-        public Builder withShipment(Shipment shipment) {
-            this.shipment = shipment;
+        public Builder withTotalValue(float totalValue) {
+            this.totalValue = totalValue;
+            return this;
+        }
+
+        public Builder withOrder(OrderDomain shipment) {
+            this.orderDomain = shipment;
             return this;
         }
 

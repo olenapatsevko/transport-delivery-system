@@ -31,6 +31,13 @@ public class TextConstants {
         public static final String ID_ITEM = "idItem";
         public static final String ID_PERSON = "idPerson";
         public static final String QUANTITY = "quantity";
+        public static final String DEPARTURE = "departure";
+        public static final String DESTINATION = "destination";
+        public static final String WIDTH = "width";
+        public static final String WEIGHT = "weight";
+        public static final String LENGTH= "length";
+        public static final String HEIGHT = "height";
+        public static final String MATERIAL = "material";
 
 
     }
@@ -48,6 +55,9 @@ public class TextConstants {
 
         public static final String BASE = "/WEB-INF/common/base.jsp";
         public static final String USER_NOT_EXIST = "/WEB-INF/common/login.jsp?userExist=false";
+
+        public static final String BASE_ORDER_SUCCESS = "/WEB-INF/common/base.jsp?orderSuccess=true";
+        public static final String BASE_ORDER_FAIL = "/WEB-INF/common/base.jsp?orderSuccess=false";
 
         public static final String REGISTRATION_FAIL_INVALID_DATA = "/WEB-INF/common/registration.jsp?dataInvalid=true";
         public static final String REGISTRATION_FAIL_PASSWORDS_DIFFERENT = "/WEB-INF/common/registration.jsp?passwordsDifferent=true";
@@ -67,6 +77,7 @@ public class TextConstants {
         public static final String LOGIN = "login";
         public static final String LOGOUT = "logout";
         public static final String PERSONAL_CABINET = "personal-cabinet";
+        public static final String MAKE_ORDER = "make-order";
 
          //directions
         public static final String CALC_ME = "calc-me";

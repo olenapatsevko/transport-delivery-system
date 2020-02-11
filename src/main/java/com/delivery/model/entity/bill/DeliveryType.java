@@ -6,16 +6,16 @@ public enum DeliveryType {
     REGION(30f),
     COUNTRY(90f);
 
-    float i ;
+    float coefficient ;
 
-    public float getI() {
-        return i;
+    public float getCoefficient() {
+        return coefficient;
     }
 
 
 
 
     DeliveryType(float i) {
-    this.i = i;
+    this.coefficient = i;
     }
 }

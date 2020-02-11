@@ -12,9 +12,10 @@ public class BillMapper implements Mapper<Bill, BillDomain> {
                 .withDeliveryType(bill.getDeliveryType())
                 .withId(bill.getId())
                 .withPayment(bill.isPayment())
-                .withShipment(bill.getShipment())
+                .withOrder(new OrderMapper().mapToDomain(bill.getOrder()))
                 .withShipmentMaterial(bill.getMaterial())
                 .withSize(bill.getSize())
+                .withTotalValue(bill.getTotalValue())
                 .withWeight(bill.getWeight())
                 .build();
     }
@@ -25,7 +26,8 @@ public class BillMapper implements Mapper<Bill, BillDomain> {
                 .withDeliveryType(bill.getDeliveryType())
                 .withId(bill.getId())
                 .withPayment(bill.isPayment())
-                .withShipment(bill.getShipment())
+                .withTotalValue(bill.getTotalValue())
+                .withOrder(new OrderMapper().mapToEntity(bill.getOrder()))
                 .withShipmentMaterial(bill.getMaterial())
                 .withSize(bill.getSize())
                 .withWeight(bill.getWeight())

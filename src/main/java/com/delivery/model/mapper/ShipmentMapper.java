@@ -12,7 +12,6 @@ public class ShipmentMapper implements Mapper<Shipment, ShipmentDomain>{
                 .withHeight(shipment.getHeight())
                 .withId(shipment.getId())
                 .withLength(shipment.getLength())
-                .withOrder(shipment.getOrder())
                 .withWeight(shipment.getWeight())
                 .withWidth(shipment.getWidth())
                 .build();
@@ -24,7 +23,6 @@ public class ShipmentMapper implements Mapper<Shipment, ShipmentDomain>{
                 .withHeight(shipment.getHeight())
                 .withId(shipment.getId())
                 .withLength(shipment.getLength())
-                .withOrder(shipment.getOrder())
                 .withWeight(shipment.getWeight())
                 .withWidth(shipment.getWidth())
                 .build();

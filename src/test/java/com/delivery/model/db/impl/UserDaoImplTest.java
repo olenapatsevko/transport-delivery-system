@@ -11,13 +11,13 @@ import static org.junit.Assert.*;
 
 public class UserDaoImplTest {
     DataBaseConnector connector ;
-    UserDaoImpl userDao;
+    UserDao userDao;
 
 
     @Before
     public void initDb(){
         connector = new DataBaseConnector("h2");
-        userDao = new UserDaoImpl(connector);
+        userDao = new UserDao(connector);
         DataBaseConnectorTest.initTestDb(connector);
 
     }

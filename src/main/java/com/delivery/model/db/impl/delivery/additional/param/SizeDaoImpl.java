@@ -1,16 +1,14 @@
 package com.delivery.model.db.impl.delivery.additional.param;
 
 import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.impl.core.AbstractEnumCrudDaoImpl;
-import com.delivery.model.entity.bill.DeliveryType;
-import com.delivery.model.entity.bill.Material;
+import com.delivery.model.db.impl.core.AbstractUnchangeableCrudDaoImpl;
 import com.delivery.model.entity.bill.Size;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class SizeDaoImpl extends AbstractEnumCrudDaoImpl<Size> {
+public class SizeDaoImpl extends AbstractUnchangeableCrudDaoImpl<Size> {
     private static final String FIND_BY_ID = "SELECT * FROM size WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM size WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM size ";

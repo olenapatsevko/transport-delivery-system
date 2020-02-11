@@ -4,6 +4,7 @@ import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.CrudDao;
 import com.delivery.model.exeption.SqlRuntimeException;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,8 +37,9 @@ public abstract class AbstractDao<E> implements CrudDao<E> {
 
     @Override
     public void deleteById(Integer id) {
-        try (final PreparedStatement preparedStatement =
-                     connector.getConnection().prepareStatement(DELETE_BY_ID)) {
+        try (Connection connection = connector.getConnection();
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement(DELETE_BY_ID)) {
 
             INT_PARAM_SETTER.accept(preparedStatement, id);
             preparedStatement.executeUpdate();
@@ -50,13 +52,13 @@ public abstract class AbstractDao<E> implements CrudDao<E> {
 
 
     public long count() {
-        try (final PreparedStatement preparedStatement =
-                     connector.getConnection().prepareStatement(COUNT_ELEMENTS)) {
+        try (Connection connection = connector.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement(COUNT_ELEMENTS)) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()){
-                return resultSet.getInt("count(*)");
+                    return resultSet.getInt("count(*)");
                 }
-                return 0;
+                    return 0;
             }
         } catch (SQLException e) {
             LOGGER.error("Exception in count method", e);
@@ -65,8 +67,8 @@ public abstract class AbstractDao<E> implements CrudDao<E> {
     }
 
     protected <P> Optional<E> findByParam(P param, String findByParam, BiConsumer<PreparedStatement, P> designatedParamSetter) {
-        try (final PreparedStatement preparedStatement =
-                     connector.getConnection().prepareStatement(findByParam)) {
+        try (Connection connection =  connector.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement(findByParam)) {
             designatedParamSetter.accept(preparedStatement, param);
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -85,6 +87,7 @@ public abstract class AbstractDao<E> implements CrudDao<E> {
             List<E> result = new ArrayList<>();
             while (resultSet.next()) {
                 final E optionalResult = mapResultSetToEntity(resultSet);
+
                 result.add(optionalResult);
             }
             return result;

@@ -1,5 +1,3 @@
-<%@ page import="com.delivery.model.utility.DeliveryUtility" %>
-<%@ page import="com.delivery.controller.injector.ApplicationInjector" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,11 +7,12 @@
 <fmt:setLocale value="${sessionScope.lang}"/>
 <fmt:setBundle basename="view"/>
 
-
-<html>
+<!DOCTYPE html>
+<html lang="${sessionScope.lang}">
 <head>
-    <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+            crossorigin="anonymous"></script>
     <title><fmt:message key="calculator.page"/></title>
 </head>
 <header>
@@ -29,11 +28,14 @@
                 <div class="card-header"><h3 class="text-center font-weight-light my-4"><fmt:message
                         key="calculator.page"/></h3></div>
                 <div class="card-body">
-                    <form role="form" method="post" action="${pageContext.request.contextPath}/app/calculator" >
 
+                    <form role="form" method="post" action="${pageContext.request.contextPath}/app/calculator" >
+                      <h2>  <p>
+                            <%= request.getAttribute("calculationResult") != null ? request.getAttribute("calculationResult") + " ₴" : "" %>
+                      </p></h2>
                         <div class="form-group">
                             <label for="departure"><fmt:message key="departure"/></label>
-                            <select class="form-control" id="departure">
+                            <select class="form-control" id="departure" name="departure">
                                 <c:forEach items="${towns}" var="town"  >
                                 <option> ${town} </option>
                                 </c:forEach>
@@ -42,7 +44,7 @@
 
                         <div class="form-group">
                             <label for="destination"><fmt:message key="destination"/></label>
-                            <select class="form-control" id="destination">
+                            <select class="form-control" id="destination" name="destination">
                                 <c:forEach items="${towns}" var="town">
                                     <option> <c:out value = "${town}"/></option>
                                 </c:forEach>
@@ -51,46 +53,55 @@
 
                         <div class="form-group">
                             <label for="material"><fmt:message key="shipment.type"/></label>
-                            <select class="form-control" id="material">
+                            <select class="form-control" id="material" name="material">
                                 <c:forEach items="${materials}" var="material">
-                                    <option> <c:out value = "${material}"/></option>
+                                    <option><c:out value="${material}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
                         <div class="form-row">
                             <div class="col-md-3 mb-4">
-                                <label for="validationCustom03"><fmt:message key="weight"/></label>
-                                <input type="number" class="form-control" id="validationCustom03" min="0" placeholder="<fmt:message key="weight"/>" required>
+                                <label for="weight"><fmt:message key="weight"/></label>
+                                <input type="number" class="form-control" name="weight" id="weight" min="0"
+                                       placeholder="<fmt:message key="weight"/>" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid city.
+                                    <fmt:message key="please.provide.valid.value"/>
                                 </div>
                             </div>
                             <div class="col-md-3 mb-4">
-                                <label for="validationCustom04"><fmt:message key="width"/></label>
-                                <input type="number" class="form-control" id="validationCustom04" min="0" placeholder="<fmt:message key="width"/>" required>
+                                <label for="width"><fmt:message key="width"/></label>
+                                <input type="number" class="form-control" name="width" id="width" min="0"
+                                       placeholder="<fmt:message key="width"/>" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid state.
+                                    <fmt:message key="please.provide.valid.value"/>
                                 </div>
                             </div>
                             <div class="col-md-3 mb-4">
-                                <label for="validationCustom05"><fmt:message key="length"/></label>
-                                <input type="number" class="form-control" id="validationCustom05" min="0" placeholder="<fmt:message key="length"/>" required>
+                                <label for="length"><fmt:message key="length"/></label>
+                                <input type="number" class="form-control" name="length" id="length" min="0"
+                                       placeholder="<fmt:message key="length"/>" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid zip.
+                                    <fmt:message key="please.provide.valid.value"/>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 mb-4">
-                                <label for="validationCustom06"><fmt:message key="height"/></label>
-                                <input type="number" class="form-control" id="validationCustom06" min="0" placeholder="<fmt:message key="height"/>" required>
+                            <div class="col-md-3 mb-4" style="height: 30px">
+                                <label for="height"><fmt:message key="height"/></label>
+                                <input type="number" class="form-control" name="height" id="height" min="0"
+                                       placeholder="<fmt:message key="height"/>" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid zip.
+                                    <fmt:message key="please.provide.valid.value"/>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <br>
+
                             </div>
                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                 <button type="submit" class="btn btn-primary">
                                     <fmt:message key="calculate"/>
                                 </button>
+
                             </div>
                         </div>
                     </form>

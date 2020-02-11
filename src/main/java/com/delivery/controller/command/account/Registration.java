@@ -6,8 +6,6 @@ import com.delivery.model.entity.Role;
 import com.delivery.model.exeption.SqlRuntimeException;
 import com.delivery.model.exeption.ValidationException;
 import com.delivery.model.service.UserService;
-import com.delivery.model.service.impl.UserServiceImpl;
-import com.delivery.model.service.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,18 +21,14 @@ public class Registration implements Command {
 
     private UserService userService;
 
-
     public Registration(UserService userService ) {
         this.userService = userService;
-
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
       try {
-
-
           userService.register(UserDomain.builder()
                   .withEmail(request.getParameter(EMAIL))
                   .withRole(Role.USER)
@@ -47,9 +41,7 @@ public class Registration implements Command {
       }catch (ValidationException | SqlRuntimeException e){
           logger.info("User {} entered invalid data.", request.getParameter(EMAIL));
           return REGISTRATION_FAIL_INVALID_DATA;
-
       }
-
 
         logger.info("User {} successfully registered.",request.getParameter(EMAIL));
         return REGISTRATION_SUCCESS;

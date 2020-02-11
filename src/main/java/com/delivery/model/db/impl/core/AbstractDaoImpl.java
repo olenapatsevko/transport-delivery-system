@@ -1,9 +1,10 @@
 package com.delivery.model.db.impl.core;
 
-import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.db.CrudDao;
+import com.delivery.model.db.DataBaseConnector;
 import com.delivery.model.exeption.SqlRuntimeException;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -35,8 +36,9 @@ public abstract class AbstractDaoImpl<E> extends AbstractDao<E> implements CrudD
     }
 
     public List<E> findAll(int page, int itemsPerPage) {
-        try (final PreparedStatement preparedStatement =
-                     connector.getConnection().prepareStatement(findAllQueryLimit)) {
+        try (Connection connection = connector.getConnection();
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement(findAllQueryLimit)) {
             preparedStatement.setInt(1, (page - 1) * itemsPerPage);
             preparedStatement.setInt(2, itemsPerPage);
 
@@ -49,7 +51,8 @@ public abstract class AbstractDaoImpl<E> extends AbstractDao<E> implements CrudD
     }
 
     public void update(E entity) {
-        try (final PreparedStatement preparedStatement = connector.getConnection().prepareStatement(updateAll)) {
+        try (Connection connection = connector.getConnection();
+             final PreparedStatement preparedStatement = connection.prepareStatement(updateAll)) {
             updateStatementSet(entity, preparedStatement);
 
             preparedStatement.executeUpdate();
@@ -60,6 +63,7 @@ public abstract class AbstractDaoImpl<E> extends AbstractDao<E> implements CrudD
 
 
     }
+
 
     protected abstract void updateStatementSet(E entity, PreparedStatement statement) throws SQLException;
 

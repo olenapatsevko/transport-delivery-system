@@ -2,6 +2,7 @@ package com.delivery.controller;
 
 import com.delivery.controller.command.Command;
 import com.delivery.controller.command.actions.CalculateDelivery;
+import com.delivery.controller.command.actions.MakeOrder;
 import com.delivery.controller.command.directions.CalculateMe;
 import com.delivery.controller.command.directions.Home;
 import com.delivery.controller.command.directions.LogMe;
@@ -42,7 +43,9 @@ public class FrontController extends HttpServlet {
                 new Logout());
         actions.put(PERSONAL_CABINET,
                 new PersonalCabinet());
-        actions.put(CALCULATE, new CalculateDelivery());
+        actions.put(CALCULATE, new CalculateDelivery(ApplicationInjector.getDeliveryCalculation()));
+
+        actions.put(MAKE_ORDER, new MakeOrder(ApplicationInjector.getOrderService()));
 
         //directions
         actions.put(HOME,
