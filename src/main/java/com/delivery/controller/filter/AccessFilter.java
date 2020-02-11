@@ -28,13 +28,13 @@ public class AccessFilter implements Filter {
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
         allowedRoutes.put(Role.USER,
-                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION,  PERSONAL_CABINET, MAKE_ORDER
+                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION,  PERSONAL_CABINET, MAKE_ORDER, PAY_THE_BILL
                         )
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
 
         allowedRoutes.put(Role.ADMIN,
-                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, PERSONAL_CABINET, MAKE_ORDER)
+                Stream.of(EMPTY_STRING, LOGOUT, HOME, LOGIN, REGISTRATION, PERSONAL_CABINET, MAKE_ORDER, PAY_THE_BILL)
                         .collect(collectingAndThen(
                                 toCollection(HashSet::new), Collections::unmodifiableSet)));
     }

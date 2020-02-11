@@ -1,12 +1,14 @@
 package com.delivery.controller.injector;
 
-import com.delivery.model.db.DataBaseConnector;
-import com.delivery.model.db.impl.*;
-import com.delivery.model.db.impl.delivery.additional.param.*;
+import com.delivery.model.dao.DataBaseConnector;
+import com.delivery.model.dao.impl.*;
+import com.delivery.model.dao.impl.delivery.additional.param.*;
 import com.delivery.model.mapper.*;
+import com.delivery.model.service.BillService;
 import com.delivery.model.service.DeliveryCalculation;
 import com.delivery.model.service.PasswordEncryption;
 import com.delivery.model.service.UserService;
+import com.delivery.model.service.impl.BillServiceImpl;
 import com.delivery.model.service.impl.DeliveryCalculationImpl;
 import com.delivery.model.service.impl.OrderServiceImpl;
 import com.delivery.model.service.impl.UserServiceImpl;
@@ -37,12 +39,16 @@ public class ApplicationInjector {
     private static final DeliveryCalculation DELIVERY_CALCULATION = new DeliveryCalculationImpl(PLACE_MAPPER,PLACE_DAO);
     private static final UserService USER_SERVICE = new UserServiceImpl(USER_DAO, USER_VALIDATOR, USER_MAPPER, PASSWORD_ENCRYPTION);
     private static final OrderServiceImpl ORDER_SERVICE = new OrderServiceImpl(USER_DAO, BILL_DAO, SHIPMENT_DAO, ORDER_DAO, PLACE_DAO, DELIVERY_CALCULATION, SHIPMENT_MAPPER, USER_VALIDATOR);
+    private static final BillService BILL_SERVICE = new BillServiceImpl(BILL_DAO, BILL_MAPPER);
 
     private static final ApplicationInjector INSTANCE = new ApplicationInjector();
 
     private ApplicationInjector() {
     }
 
+    public static BillService getBillService() {
+        return BILL_SERVICE;
+    }
 
     public static OrderServiceImpl getOrderService() {
         return ORDER_SERVICE;

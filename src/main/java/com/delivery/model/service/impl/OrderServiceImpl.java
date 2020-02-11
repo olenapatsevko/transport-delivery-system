@@ -1,6 +1,6 @@
 package com.delivery.model.service.impl;
 
-import com.delivery.model.db.impl.*;
+import com.delivery.model.dao.impl.*;
 import com.delivery.model.domain.PlaceDomain;
 import com.delivery.model.domain.ShipmentDomain;
 import com.delivery.model.domain.UserDomain;
@@ -94,7 +94,7 @@ public class OrderServiceImpl {
                 .withDeliveryType(deliveryCalculationImpl.deliveryTypeDefiner(dispatch, destination))
                 .withWeight(deliveryCalculationImpl.weightTypeDefiner(order.getShipment().getWeight()))
                 .withOrder(order)
-                .withTotalValue(totalPrice)
+                .withTotalValue(Math.round(totalPrice))
                 .build();
     }
 

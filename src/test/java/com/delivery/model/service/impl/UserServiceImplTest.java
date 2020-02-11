@@ -1,6 +1,6 @@
 package com.delivery.model.service.impl;
 
-import com.delivery.model.db.impl.UserDao;
+import com.delivery.model.dao.impl.UserDao;
 import com.delivery.model.domain.UserDomain;
 import com.delivery.model.entity.User;
 import com.delivery.model.service.validator.UserValidator;

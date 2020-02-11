@@ -56,7 +56,7 @@
 
 
         <main>
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top: 10%;">
                 <h1 class="mt-4"><fmt:message key="personal.cabinet"/></h1>
                 <div class="row">
                     <div class="col-xl-6">
@@ -187,11 +187,11 @@
                                 <tbody>
                                 <c:forEach var="report" items="${bills}">
                                     <tr>
-                                        <td><c:out value="${report.id}"/></td>
+                                        <td><c:out value="${report.getId()}"/></td>
 
                                         <c:if test="${report.payment==false}">
                                             <td>
-                                                <button><a
+                                                <button type="button" class="btn btn-light"><a class="btn btn-light"
                                                         href="${pageContext.request.contextPath}/app/pay?id=${report.id}">
                                                     <c:out value="${report.payment}"/></a></button>
                                             </td>
@@ -199,23 +199,66 @@
 
                                         <c:if test="${report.payment==true}">
                                             <td>
-                                                <button><a class="active" href="#">
+                                                <button type="button" class="btn btn-success"><a class="btn btn-success" href="#">
                                                     <c:out value="${report.payment}"/></a></button>
                                             </td>
                                         </c:if>
 
-                                        <td><c:out value="${report.delivery}"/></td>
+                                        <td><c:out value="${report.delivery.toString()}"/></td>
                                         <td><c:out value="${report.size}"/></td>
                                         <td><c:out value="${report.weight}"/></td>
 
                                         <td><a href="${pageContext.request.contextPath}/app/pay?bill=${report.id}">
-                                            <c:out value="${report.total.price}"/></a></td>
+                                            <c:out value="${report.totalValue}"/></a></td>
 
-                                        <td><c:out value="${report.receive.date}"/></td>
+                                        <td><c:out value="${report.order.localDateTime}"/></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
+
+
+                            <nav>
+                                <ul class="pagination ">
+
+                                    <c:if test="${currentPage != 1}">
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                               href="${pageContext.request.contextPath}/app/personal-cabinet?currentPage=${currentPage - 1}">
+                                                <fmt:message key="label.prev"/>
+                                            </a>
+                                        </li>
+                                    </c:if>
+
+
+                                    <c:forEach begin="1" end="${noOfPages}" var="i">
+                                        <c:choose>
+                                            <c:when test="${currentPage eq i}">
+                                                <li class="page-item active">
+                                                    <a class="page-link"
+                                                       href="#"> ${i} </a>
+                                                </li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                       href="${pageContext.request.contextPath}/app/personal-cabinet?currentPage=${i}">${i}</a>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+
+
+                                    <c:if test="${currentPage lt noOfPages}">
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="${pageContext.request.contextPath}/app/personal-cabinet?currentPage=${currentPage + 1}">
+                                            <fmt:message key="label.next"/>
+                                        </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
+
                         </div>
                     </div>
                 </div>
@@ -228,10 +271,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/base/js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/base/assets/demo/chart-area-demo.js"></script>
-<script src="${pageContext.request.contextPath}/base/assets/demo/chart-bar-demo.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/base/assets/demo/datatables-demo.js"></script>
+<%--<script src="${pageContext.request.contextPath}/base/assets/demo/chart-area-demo.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/base/assets/demo/chart-bar-demo.js"></script>--%>
+<%--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/base/assets/demo/datatables-demo.js"></script>--%>
 </body>
 </html>

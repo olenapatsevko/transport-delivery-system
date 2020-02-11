@@ -1,5 +1,6 @@
 package com.delivery.controller.command;
 
+import com.delivery.controller.injector.ApplicationInjector;
 import com.delivery.model.entity.Role;
 import com.delivery.model.entity.User;
 import com.delivery.model.service.UserService;
@@ -73,6 +74,13 @@ public class CommandUtil {
                 response.sendRedirect(path +  INVALID_SESSION_ERROR);
             }
         }
+
+    public static User getCurrentSessionUser(HttpServletRequest request){
+
+        final HttpSession session = request.getSession();
+        String email = session.getAttribute(EMAIL).toString();
+        return ApplicationInjector.getUserDao().findByEmail(email).get();
+    }
 
 
 

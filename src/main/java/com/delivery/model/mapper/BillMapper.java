@@ -23,7 +23,7 @@ public class BillMapper implements Mapper<Bill, BillDomain> {
     @Override
     public Bill mapToEntity(BillDomain bill) {
         return Bill.builder()
-                .withDeliveryType(bill.getDeliveryType())
+                .withDeliveryType(bill.getDelivery())
                 .withId(bill.getId())
                 .withPayment(bill.isPayment())
                 .withTotalValue(bill.getTotalValue())

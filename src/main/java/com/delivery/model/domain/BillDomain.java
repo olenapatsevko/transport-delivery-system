@@ -10,7 +10,7 @@ import java.util.Objects;
 public class BillDomain {
     private int id;
     private boolean payment;
-    private DeliveryType deliveryType;
+    private DeliveryType delivery;
     private Size size;
     private Weight weight;
     private Material material;
@@ -21,7 +21,7 @@ public class BillDomain {
         this.id = builder.id;
         this.orderDomain = builder.orderDomain;
         this.payment = builder.payment;
-        this.deliveryType = builder.deliveryType;
+        this.delivery = builder.delivery;
         this.size = builder.size;
         this.weight = builder.weight;
         this.material = builder.material;
@@ -41,7 +41,7 @@ public class BillDomain {
         return id == bill.id &&
                 payment == bill.payment &&
                 Objects.equals(orderDomain, bill.orderDomain) &&
-                deliveryType == bill.deliveryType &&
+                delivery == bill.delivery &&
                 size == bill.size &&
                 weight == bill.weight &&
                 material == bill.material;
@@ -49,7 +49,7 @@ public class BillDomain {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderDomain, payment, deliveryType, size, weight, material);
+        return Objects.hash(id, orderDomain, payment, delivery, size, weight, material);
     }
 
     public int getId() {
@@ -64,8 +64,8 @@ public class BillDomain {
         return payment;
     }
 
-    public DeliveryType getDeliveryType() {
-        return deliveryType;
+    public DeliveryType getDelivery() {
+        return delivery;
     }
 
     public Size getSize() {
@@ -90,7 +90,7 @@ public class BillDomain {
                 "id=" + id +
                 ", orderdDomain=" + orderDomain +
                 ", payment=" + payment +
-                ", deliveryType=" + deliveryType +
+                ", deliveryType=" + delivery +
                 ", size=" + size +
                 ", weight=" + weight +
                 ", shipmentMaterial=" + material +
@@ -101,7 +101,7 @@ public class BillDomain {
         private int id;
         private OrderDomain orderDomain;
         private boolean payment;
-        private DeliveryType deliveryType;
+        private DeliveryType delivery;
         private Size size;
         private Weight weight;
         private Material material;
@@ -131,8 +131,8 @@ public class BillDomain {
             return this;
         }
 
-        public Builder withDeliveryType(DeliveryType deliveryType) {
-            this.deliveryType = deliveryType;
+        public Builder withDeliveryType(DeliveryType delivery) {
+            this.delivery = delivery;
             return this;
         }
 

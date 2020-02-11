@@ -1,6 +1,6 @@
 package com.delivery.model.service.impl;
 
-import com.delivery.model.db.impl.PlaceDaoImpl;
+import com.delivery.model.dao.impl.PlaceDaoImpl;
 import com.delivery.model.domain.PlaceDomain;
 import com.delivery.model.domain.ShipmentDomain;
 import com.delivery.model.entity.bill.DeliveryType;

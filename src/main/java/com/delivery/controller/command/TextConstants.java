@@ -20,7 +20,7 @@ public class TextConstants {
         public static final String LOGGED_USERS = "loggedUsers";
         public static final String CURRENT_PAGE = "currentPage";
         public static final String NO_OF_PAGES = "noOfPages";
-        public static final String REPORTS = "reports";
+        public static final String BILLS = "bills";
         public static final String REPORTS_TO_CHANGE = "reportsToChange";
         public static final String ITEMS = "items";
         public static final String PERSONS = "persons";
@@ -78,6 +78,7 @@ public class TextConstants {
         public static final String LOGOUT = "logout";
         public static final String PERSONAL_CABINET = "personal-cabinet";
         public static final String MAKE_ORDER = "make-order";
+        public static final String PAY_THE_BILL= "pay";
 
          //directions
         public static final String CALC_ME = "calc-me";

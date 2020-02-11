@@ -3,6 +3,7 @@ package com.delivery.controller;
 import com.delivery.controller.command.Command;
 import com.delivery.controller.command.actions.CalculateDelivery;
 import com.delivery.controller.command.actions.MakeOrder;
+import com.delivery.controller.command.actions.PayCommand;
 import com.delivery.controller.command.directions.CalculateMe;
 import com.delivery.controller.command.directions.Home;
 import com.delivery.controller.command.directions.LogMe;
@@ -42,10 +43,11 @@ public class FrontController extends HttpServlet {
         actions.put(LOGOUT,
                 new Logout());
         actions.put(PERSONAL_CABINET,
-                new PersonalCabinet());
+                new PersonalCabinet(ApplicationInjector.getOrderService(), ApplicationInjector.getBillService()));
         actions.put(CALCULATE, new CalculateDelivery(ApplicationInjector.getDeliveryCalculation()));
 
-        actions.put(MAKE_ORDER, new MakeOrder(ApplicationInjector.getOrderService()));
+        actions.put(MAKE_ORDER, new MakeOrder(ApplicationInjector.getOrderService(), ApplicationInjector.getBillService()));
+        actions.put(PAY_THE_BILL , new PayCommand());
 
         //directions
         actions.put(HOME,
