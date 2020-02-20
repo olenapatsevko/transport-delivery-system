@@ -26,4 +26,9 @@ public class BillServiceImpl implements BillService {
     public int getCountOfBills(String email) {
         return billDao.countUserBill(email);
     }
+
+    @Override
+    public void payTheBill(int id){
+        billDao.paymentChange(id);
+    }
 }

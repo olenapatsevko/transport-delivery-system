@@ -1,6 +1,10 @@
 package com.delivery.controller;
 
 import com.delivery.controller.command.Command;
+import com.delivery.controller.command.account.Login;
+import com.delivery.controller.command.account.Logout;
+import com.delivery.controller.command.account.PersonalCabinet;
+import com.delivery.controller.command.account.Registration;
 import com.delivery.controller.command.actions.CalculateDelivery;
 import com.delivery.controller.command.actions.MakeOrder;
 import com.delivery.controller.command.actions.PayCommand;
@@ -8,11 +12,6 @@ import com.delivery.controller.command.directions.CalculateMe;
 import com.delivery.controller.command.directions.Home;
 import com.delivery.controller.command.directions.LogMe;
 import com.delivery.controller.command.directions.RegMe;
-import com.delivery.controller.command.account.Login;
-import com.delivery.controller.command.account.Logout;
-import com.delivery.controller.command.account.PersonalCabinet;
-import com.delivery.controller.command.account.Registration;
-import com.delivery.controller.injector.ApplicationInjector;
 import com.delivery.model.utility.DeliveryUtility;
 
 import javax.servlet.ServletConfig;
@@ -28,6 +27,7 @@ import static com.delivery.controller.command.TextConstants.CommandPaths.*;
 import static com.delivery.controller.command.TextConstants.Parameters.CALCULATE;
 import static com.delivery.controller.command.TextConstants.Routes.EMPTY_STRING;
 import static com.delivery.controller.command.TextConstants.Routes.REDIRECT;
+import static com.delivery.controller.injector.ApplicationInjector.*;
 
 public class FrontController extends HttpServlet {
 
@@ -35,19 +35,19 @@ public class FrontController extends HttpServlet {
 
 
     @Override
-    public void init(ServletConfig config)  {
+    public void init(ServletConfig config) {
         actions.put(REGISTRATION,
-                new Registration(ApplicationInjector.getUserService()));
+                new Registration(getUserService()));
         actions.put(LOGIN,
-                new Login(ApplicationInjector.getUserService()));
+                new Login(getUserService()));
         actions.put(LOGOUT,
                 new Logout());
         actions.put(PERSONAL_CABINET,
-                new PersonalCabinet(ApplicationInjector.getOrderService(), ApplicationInjector.getBillService()));
-        actions.put(CALCULATE, new CalculateDelivery(ApplicationInjector.getDeliveryCalculation()));
+                new PersonalCabinet(getOrderService(), getBillService(), getPagination()));
+        actions.put(CALCULATE, new CalculateDelivery(getDeliveryCalculation()));
 
-        actions.put(MAKE_ORDER, new MakeOrder(ApplicationInjector.getOrderService(), ApplicationInjector.getBillService()));
-        actions.put(PAY_THE_BILL , new PayCommand());
+        actions.put(MAKE_ORDER, new MakeOrder(getOrderService(), getBillService()));
+        actions.put(PAY_THE_BILL, new PayCommand(getBillService()));
 
         //directions
         actions.put(HOME,

@@ -8,4 +8,6 @@ import java.util.List;
 public interface BillService {
     List<BillDomain> getListForPage(int page, int perPage , String email);
     int getCountOfBills(String email);
+    void payTheBill(int id);
+
 }

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public final class PasswordEncryption {
+public class PasswordEncryption {
 
     private static final Logger LOGGER = (Logger) LogManager.getLogger(PasswordEncryption.class);
     private static final byte[] salt = ResourceBundle.getBundle("service").getString("salt").getBytes();

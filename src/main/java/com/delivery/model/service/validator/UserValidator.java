@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("squid:S1171")
 public class UserValidator {
-    private final StringReg stringReg = new StringReg();
+    private  StringReg stringReg = new StringReg();
 
     public void validate(User user) {
         if (!(stringReg.validate(user, User::getEmail, "email") && stringReg.validate(user, User::getPassword, "password"))) {

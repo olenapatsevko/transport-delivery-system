@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class OrderServiceImpl {
-    private final UserDao userDao;
+    private final UserDaoImpl userDaoImpl;
     private final BillDaoImpl billDaoImp;
     private final ShipmentDaoImpl shipmentDao;
     private final OrderDaoImpl orderDao;
@@ -28,11 +28,11 @@ public class OrderServiceImpl {
     private final ShipmentMapper shipmentMapper;
     private final UserValidator userValidator;
 
-    public OrderServiceImpl(UserDao userDao, BillDaoImpl billDaoImp,
+    public OrderServiceImpl(UserDaoImpl userDaoImpl, BillDaoImpl billDaoImp,
                             ShipmentDaoImpl shipmentDao, OrderDaoImpl orderDao, PlaceDaoImpl placeDao,
                             DeliveryCalculation deliveryCalculationImpl, ShipmentMapper shipmentMapper,
                             UserValidator userValidator) {
-        this.userDao = userDao;
+        this.userDaoImpl = userDaoImpl;
         this.billDaoImp = billDaoImp;
         this.shipmentDao = shipmentDao;
         this.orderDao = orderDao;
@@ -75,7 +75,7 @@ public class OrderServiceImpl {
         return Order.builder()
                 .withShipment(shipment)
                 .withId((int) new Date().getTime())
-                .withSender(userDao.findByEmail(userDomain.getEmail()).get())
+                .withSender(userDaoImpl.findByEmail(userDomain.getEmail()).get())
                 .withDispatch(placeDao.findByName(dispatch.getCity()).get())
                 .withDestination(placeDao.findByName(destination.getCity()).get())
                 .withDeliveryDate(countDeliveryDate(deliveryCalculationImpl.deliveryTypeDefiner(dispatch, destination)))

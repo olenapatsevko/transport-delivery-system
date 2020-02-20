@@ -26,6 +26,7 @@ public class BillDaoImpl extends AbstractDaoImpl<Bill> implements BillDao {
     private static final String FIND_ALL_FOR_USER = "SELECT * from bill where ";
     private static final String BILLS_FOR_USER_LIMIT = "SELECT bill.id as id , bill.size as size, bill.material as material , bill.weight as weight , bill.orders as orders , bill.payment as payment , bill.delivery as delivery , bill.total_price as total_price  from bill inner join  orders o on bill.orders = o.id join user u on o.user = u.id where u.email = ? LIMIT ?, ?";
     private static final String BILLS_FOR_USER = "SELECT bill.id as id , bill.size as size, bill.material as material , bill.weight as weight , bill.orders as orders , bill.payment as payment , bill.delivery as delivery , bill.total_price as total_price  from bill inner join  orders o on bill.orders = o.id join user u on o.user = u.id where u.email = ? ";
+    private static final String BILL_PAID = "UPDATE bill SET payment = true WHERE id = ?";
     public BillDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
     }
@@ -85,6 +86,20 @@ public class BillDaoImpl extends AbstractDaoImpl<Bill> implements BillDao {
         }
     }
 
+    @Override
+    public void paymentChange(int id){
+        try (Connection connection = connector.getConnection();
+             final PreparedStatement preparedStatement =
+                     connection.prepareStatement(BILL_PAID)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error("Exception in paymentChange method", e);
+            throw new SqlRuntimeException("Can't update payment ", e);
+        }
+
+    }
 
     @Override
     public List<Bill> findAllBillsForUser(int page, int itemsPerPage, String email) {

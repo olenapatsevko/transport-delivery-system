@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 
-public class UserDao extends AbstractDaoImpl<User> implements com.delivery.model.dao.UserDao {
+public class UserDaoImpl extends AbstractDaoImpl<User> implements com.delivery.model.dao.UserDao {
     private static final String FIND_BY_ID = "SELECT * FROM user WHERE id=?";
     private static final String DELETE_BY_ID = "DELETE FROM user WHERE id = ?";
     private static final String COUNT_ALL = "SELECT count(*) FROM user ";
@@ -23,7 +23,7 @@ public class UserDao extends AbstractDaoImpl<User> implements com.delivery.model
     private static final String SAVE_ENTITY = "INSERT into user (id, name, surname, password, phone, email, role) VALUES (null, ?, ?, ?, ?, ?, ?)";
 
 
-    public UserDao(DataBaseConnector connector) {
+    public UserDaoImpl(DataBaseConnector connector) {
         super(connector, FIND_BY_ID, DELETE_BY_ID, COUNT_ALL, FIND_ALL_LIMIT, SAVE_ENTITY, UPDATE_ALL);
     }
 

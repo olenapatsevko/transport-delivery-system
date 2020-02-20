@@ -30,7 +30,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDao {
     protected Order mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         return Order.builder()
                 .withId(resultSet.getInt("id"))
-                .withSender(new UserDao(this.connector).findById(resultSet.getInt("user")).get())
+                .withSender(new UserDaoImpl(this.connector).findById(resultSet.getInt("user")).get())
                 .withDestination(new PlaceDaoImpl(this.connector).findById(resultSet.getInt("destination")).get())
                 .withDispatch(new PlaceDaoImpl(this.connector).findById(resultSet.getInt("dispatch")).get())
                 .withOrderStatus(OrderStatus.valueOf(resultSet.getString("status")))

@@ -10,4 +10,6 @@ public interface BillDao extends CrudPageableDao<Bill> {
    List<Bill> findAllBillsForUser(int page, int perPage, String email);
 
    int countUserBill(String email);
+
+   void paymentChange(int id);
 }

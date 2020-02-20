@@ -9,53 +9,53 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UserDaoImplTest {
+public class UserDaoImplImplTest {
     DataBaseConnector connector ;
-    UserDao userDao;
+    UserDaoImpl userDaoImpl;
 
 
     @Before
     public void initDb(){
         connector = new DataBaseConnector("h2");
-        userDao = new UserDao(connector);
+        userDaoImpl = new UserDaoImpl(connector);
         DataBaseConnectorTest.initTestDb(connector);
 
     }
 
     @Test
     public void findUserByEmail(){
-        assertEquals(14,userDao.findByEmail("dlecountd@exblog.jp").get().getId() );
+        assertEquals(14, userDaoImpl.findByEmail("dlecountd@exblog.jp").get().getId() );
     }
 
     @Test
     public void findUserById(){
-        assertEquals("Morgen", userDao.findById(1).get().getFirstName());
+        assertEquals("Morgen", userDaoImpl.findById(1).get().getFirstName());
     }
 
     @Test
     public void countUsers(){
-        assertEquals(20, userDao.count());
+        assertEquals(20, userDaoImpl.count());
     }
 
     @Test
     public void findUsersPerPage(){
-        assertEquals(3 , userDao.findAll(3,3).size());
+        assertEquals(3 , userDaoImpl.findAll(3,3).size());
     }
 
     @Test
     public void saveNewUser(){
-        userDao.save(User.builder().withEmail("asd").withFirstName("asd")
-                .withId((int) (userDao.count()+1))
+        userDaoImpl.save(User.builder().withEmail("asd").withFirstName("asd")
+                .withId((int) (userDaoImpl.count()+1))
                 .withPassword("sdfg")
                 .withSecondName("sfgdf")
                 .withPhone("fg")
                 .withRole(Role.ADMIN).build());
-        assertEquals(21, userDao.count());
+        assertEquals(21, userDaoImpl.count());
     }
 
     @Test
     public void deleteuserById(){
-        userDao.deleteById(12);
-        assertEquals(19, userDao.count());
+        userDaoImpl.deleteById(12);
+        assertEquals(19, userDaoImpl.count());
     }
 }

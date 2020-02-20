@@ -6,7 +6,7 @@ import com.delivery.model.service.impl.DeliveryCalculationImpl;
 import com.delivery.model.service.validator.UserValidator;
 
 public interface OrderService {
-    void makeOrder(UserDao userDao, BillDaoImpl billDaoImp,
+    void makeOrder(UserDaoImpl userDaoImpl, BillDaoImpl billDaoImp,
                    ShipmentDaoImpl shipmentDao, OrderDaoImpl orderDao, PlaceDaoImpl placeDao,
                    DeliveryCalculationImpl deliveryCalculationImpl, ShipmentMapper shipmentMapper,
                    UserValidator userValidator);

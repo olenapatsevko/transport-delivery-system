@@ -20,8 +20,6 @@ import static com.delivery.controller.command.CommandUtil.getCurrentSessionUser;
 import static com.delivery.controller.command.TextConstants.Parameters.*;
 import static com.delivery.controller.command.TextConstants.Routes.BASE_ORDER_FAIL;
 import static com.delivery.controller.command.TextConstants.Routes.BASE_ORDER_SUCCESS;
-import static com.delivery.model.utility.DeliveryUtility.getListOfMaterials;
-import static com.delivery.model.utility.DeliveryUtility.getListOfTowns;
 import static java.lang.Float.parseFloat;
 
 
@@ -36,7 +34,7 @@ public class MakeOrder implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        orderFormParams(request);
+
         try {
             orderService.makeOrder(new PlaceDomain(request.getParameter(DEPARTURE)),
                     new PlaceDomain(request.getParameter(DESTINATION)),
@@ -62,6 +60,14 @@ public class MakeOrder implements Command {
             return BASE_ORDER_FAIL;
         }
 
+
+        int RECORDS_PER_PAGE = 5;
+        int currentPage = 1;
+        currentPage = getCurrentPage(request, RECORDS_PER_PAGE, currentPage);
+
+
+        performPagination(request, currentPage, RECORDS_PER_PAGE);
+
         return BASE_ORDER_SUCCESS;
 
 
@@ -82,23 +88,10 @@ public class MakeOrder implements Command {
         return currentPage;
     }
 
-    private void orderFormParams(HttpServletRequest request) {
-        request.removeAttribute("towns");
-        request.removeAttribute("materials");
-        request.setAttribute("towns", getListOfTowns());
-        request.setAttribute("materials", getListOfMaterials());
-    }
 
     private void performPagination(HttpServletRequest request, int currentPage, int recordsPerPage) {
 
         final User currentSessionUser = getCurrentSessionUser(request);
-        final long currentUserId = currentSessionUser.getId();
-
-        int lowerBound = calcLowerBound(currentPage, recordsPerPage);
-
-
-//        PaginationResult paginationResult =
-//                reportService.getReportsByPagination(lowerBound, recordsPerPage, currentUserId);
 
         List<BillDomain> bills = billService.getListForPage(currentPage, recordsPerPage, getCurrentSessionUser(request).getEmail());
 
@@ -110,9 +103,6 @@ public class MakeOrder implements Command {
         request.setAttribute(CURRENT_PAGE, currentPage);
     }
 
-    private int calcLowerBound(int currentPage, int recordsPerPage) {
-        return (currentPage - 1) * recordsPerPage;
-    }
 
     private int calcNoOfPages(int noOfRecords, int recordsPerPage) {
         return (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
